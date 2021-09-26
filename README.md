@@ -1,6 +1,6 @@
 ## Welcome to My Blog
 
-You can use the [editor on GitHub](https://github.com/yuran1811/YuranPage/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+## Here is the Doc of this Page
 
 ### Markdown
 
