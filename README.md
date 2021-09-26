@@ -23,3 +23,7 @@ Syntax highlighted code block
 
 [Link](url) and ![Image](src)
 ```
+
+```
+New way to discover the World
+```
