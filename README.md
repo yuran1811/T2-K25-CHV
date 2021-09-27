@@ -13,4 +13,4 @@
 * [**Sử**](https://meet.google.com/sfj-omiu-vkb?pli=1&authuser=1)
 
 * [**Công nghệ**](https://meet.google.com/szi-dssf-hmv?pli=1&authuser=1)
-* [**Nop bai cong nghe**](https://forms.gle/qMvqXjCbTZDSfgm89)
+* [**Nộp bài công nghệ**](https://forms.gle/qMvqXjCbTZDSfgm89)
