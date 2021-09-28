@@ -2,6 +2,7 @@
 
 * [**Toán**](https://meet.google.com/hzx-chqe-trx?pli=1&authuser=1)
 * [**Tin (Thầy Khánh)**](https://zoom.us/j/7986667995?pwd=TUF0dlZGVFJyam1WcWpUTjY0ampGQT09)
+* [**Tin (Cô Nhị)**](https://meet.google.com/jzh-nzaw-hzb)
 * [**Sinh**](https://zoom.us/j/9634945813?pwd=cWdGZWtXY1BWMXVqcnYwZVphVCtKUT09)
 
 
