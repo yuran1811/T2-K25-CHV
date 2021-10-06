@@ -8,6 +8,7 @@
 
 * [**SHDT**](https://zoom.us/j/2021355355?pwd=dU5QbDFoZzR3UjVxNVMvZTJBbHhQQT09)
 * [**GDQP**](https://meet.google.com/mey-nxiz-jcm?pli=1&authuser=1)
+* [**Nghề**](https://zoom.us/j/6418239093?pwd=R2RwK1F3eWJjd1RhbktHOEtRWDdSdz09)
 
 * [**Văn**](https://zoom.us/j/3629177765?pwd=ZUc2VFJhRENKM3JHcXZua2VtUHVxZz09)
 * [**GDCD**](https://meet.google.com/yry-gmyd-dya?pli=1&authuser=1)
