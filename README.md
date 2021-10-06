@@ -1,10 +1,10 @@
 # Link
 
 * [**Toán**](https://meet.google.com/hzx-chqe-trx?pli=1&authuser=1)
+* [**Hóa**](https://zoom.us/j/8157220370?pwd=SW1mSlAzMWZPSWxYa1huQ0hxZ2hsdz09)
+* [**Sinh**](https://zoom.us/j/9634945813?pwd=cWdGZWtXY1BWMXVqcnYwZVphVCtKUT09)
 * [**Tin (Thầy Khánh)**](https://zoom.us/j/7986667995?pwd=TUF0dlZGVFJyam1WcWpUTjY0ampGQT09)
 * [**Tin (Cô Nhị)**](https://meet.google.com/jzh-nzaw-hzb)
-* [**Sinh**](https://zoom.us/j/9634945813?pwd=cWdGZWtXY1BWMXVqcnYwZVphVCtKUT09)
-
 
 * [**SHDT**](https://zoom.us/j/2021355355?pwd=dU5QbDFoZzR3UjVxNVMvZTJBbHhQQT09)
 * [**GDQP**](https://meet.google.com/mey-nxiz-jcm?pli=1&authuser=1)
