@@ -8,3 +8,4 @@ Tự nhiên|Xã hội|Khác|
 [**Sinh**](https://zoom.us/j/9634945813?pwd=cWdGZWtXY1BWMXVqcnYwZVphVCtKUT09)|[**GDCD**](https://meet.google.com/yry-gmyd-dya?pli=1&authuser=1)|[**Công nghệ**](https://meet.google.com/szi-dssf-hmv?pli=1&authuser=1)
 [**Tin (Thầy Khánh)**](https://zoom.us/j/7986667995?pwd=TUF0dlZGVFJyam1WcWpUTjY0ampGQT09)|[**GDQP**](https://meet.google.com/mey-nxiz-jcm?pli=1&authuser=1)|[**Nộp bài công nghệ**](https://forms.gle/qMvqXjCbTZDSfgm89)
 [**Tin (Cô Nhị)**](https://meet.google.com/jzh-nzaw-hzb)|
+[**Lí**](https://meet.google.com/zmt-ntbk-odg)
