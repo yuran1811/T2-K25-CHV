@@ -10,7 +10,7 @@ Tự nhiên|Xã hội|Khác|
 [**Tin (N)**](https://meet.google.com/jzh-nzaw-hzb)||
 
 ### Buổi 2
-[**Lí (Cô Oanh)**](https://meet.google.com/xqj-fjru-ogx)
-[**Toán (Thầy Nhân)**](https://zoom.us/j/9595909888?pwd=bHlOQTBVbytZR1QyY0VpYWpuVzlRQT09)
++ [**Lí (Cô Oanh)**](https://meet.google.com/xqj-fjru-ogx)
++ [**Toán (Thầy Nhân)**](https://zoom.us/j/9595909888?pwd=bHlOQTBVbytZR1QyY0VpYWpuVzlRQT09)
 
 ## [**CHV Web Page**](http://thptchv.edu.vn)
