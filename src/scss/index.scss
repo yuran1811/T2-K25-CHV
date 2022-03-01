@@ -1,0 +1,395 @@
+@import 'config';
+@import 'reset';
+
+/* 
+@include Responsive(SM) {}
+@include Responsive(MD) {}
+*/
+
+canvas {
+	position: fixed;
+	inset: 0;
+	border: none;
+	outline: none;
+	display: none;
+	z-index: -1;
+	@include Responsive(MD) {
+		display: block;
+	}
+}
+
+#app {
+	position: absolute;
+	inset: 0;
+	&.mini {
+		.sidebar {
+			width: 0;
+
+			& > ul {
+				$num-items: 6;
+
+				transform: translateX(-150%);
+
+				@for $i from 1 through $num-items {
+					& > li:nth-child(#{$i}) {
+						transition-delay: 0s;
+					}
+				}
+
+				& > li {
+					opacity: 0;
+					transform: translateX(-150%);
+				}
+			}
+
+			& + .content {
+				left: 0;
+			}
+		}
+
+		.header .switch-btn {
+			background-image: $grdi10;
+		}
+	}
+
+	.header {
+		$switch-size: 5rem;
+
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: $header-height;
+		background-color: rgba(0, 0, 0, 0.015);
+		display: flex;
+		align-items: center;
+
+		.switch-btn {
+			cursor: pointer;
+			position: relative;
+			left: 1rem;
+			width: $switch-size;
+			height: $switch-size;
+			border-radius: 50%;
+			background-image: $grdi13;
+			transition: all 0.3s ease;
+
+			@include Responsive(SM) {
+				left: 2rem;
+			}
+			@include Responsive(MD) {
+				left: 2rem;
+			}
+		}
+
+		&-title {
+			position: relative;
+			color: $text-color;
+			font-size: 2.4rem;
+			text-align: center;
+			text-transform: uppercase;
+			letter-spacing: 0.2rem;
+			padding: 1.8rem 0;
+			margin: auto;
+
+			@include Responsive(SM) {
+				padding: 2rem 0;
+				font-size: 4rem;
+				letter-spacing: 0.5rem;
+			}
+			@include Responsive(MD) {
+				padding: 2rem 0;
+				font-size: 5rem;
+				letter-spacing: 0.5rem;
+			}
+		}
+	}
+
+	.sidebar {
+		position: fixed;
+		top: $header-height;
+		width: $side-bar-width;
+		overflow: hidden auto;
+		max-height: calc(100vh - #{$header-height});
+		transition: all 0.3s ease;
+
+		& > ul {
+			$num-items: 6;
+
+			padding: 1rem;
+			font-size: 2rem;
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+			justify-content: start;
+			transform: translateX(0);
+			transition: all 0.3s ease;
+
+			@for $i from 1 through $num-items {
+				& > li:nth-child(#{$i}) {
+					transition-delay: #{max($i / 12 - 0.1, 0)}s;
+				}
+			}
+
+			& > li {
+				padding: 3rem 0;
+				margin: 1rem 0;
+				width: 90%;
+				opacity: 1;
+				color: white;
+				font-weight: bold;
+				text-align: center;
+				border-radius: 2.4rem;
+				background-image: $grdi5;
+				transform: translateX(0);
+				transition: all 0.3s ease;
+				cursor: pointer;
+
+				& > span {
+					width: 100%;
+				}
+			}
+		}
+
+		@include Responsive(SM) {
+			width: $side-bar-width-tab;
+		}
+		@include Responsive(MD) {
+			width: $side-bar-width-pc;
+		}
+	}
+
+	.content {
+		position: fixed;
+		top: $header-height;
+		bottom: $header-height;
+		left: $side-bar-width;
+		width: 100%;
+		font-size: 3rem;
+		padding: 2rem 5rem;
+		margin: auto;
+		display: flex;
+		align-items: center;
+		transition: all 0.3s ease;
+
+		& > ul {
+			margin: auto;
+			width: 100%;
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+			justify-content: center;
+			transition: all 0.2s ease;
+
+			& > li {
+				position: relative;
+				text-align: center;
+				padding: 2.4rem;
+				margin: 1rem;
+				width: 100%;
+				height: 8rem;
+				max-height: 50rem;
+				border-radius: 2rem;
+				color: white;
+				background-image: $grdi2;
+				transition: all 0.7s ease;
+				overflow: hidden;
+				&:hover,
+				&.wide {
+					background: url(../img/bg1.jpg);
+					background-position: center;
+					background-size: cover;
+					object-fit: cover;
+					height: 20rem;
+
+					& > button {
+						transform: translate(-50%, -40%);
+					}
+
+					& > span {
+						top: 10%;
+						transform: translateY(-50%);
+						font-size: 4.2rem;
+						font-weight: bold;
+					}
+				}
+
+				& > button {
+					cursor: pointer;
+					position: absolute;
+					bottom: 0;
+					left: 50%;
+					transform: translate(-50%, 100%);
+					width: 70%;
+					height: 6rem;
+					color: white;
+					font-size: 3rem;
+					padding: 2rem;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					text-align: center;
+					border-radius: 1.5rem;
+					background-image: $grdi1;
+					transition: all 0.3s ease;
+				}
+
+				& > span {
+					position: relative;
+					top: 0;
+					transform: translateY(0);
+					transition: all 0.3s ease;
+				}
+
+				@include Responsive(SM) {
+					width: 10rem;
+					height: 50vh;
+					&:hover,
+					&.wide {
+						width: 100%;
+						height: 50vh;
+
+						& > button {
+							bottom: 0;
+							transform: translate(-50%, -200%);
+						}
+
+						& > span {
+							top: 20%;
+							transform: translateY(-50%);
+							font-size: 6rem;
+							writing-mode: horizontal-tb;
+						}
+					}
+
+					& > span {
+						writing-mode: vertical-rl;
+					}
+				}
+				@include Responsive(MD) {
+					width: 100%;
+					min-height: 38rem;
+					height: 50vh;
+					margin-left: 0;
+					margin-right: 0;
+					border-radius: 0;
+					clip-path: polygon(
+						5rem 0%,
+						100% 0%,
+						calc(100% - 5rem) 100%,
+						0% 100%
+					);
+					&:hover,
+					&.wide {
+						width: 550%;
+						height: 50vh;
+
+						& > button {
+							bottom: 0;
+							transform: translate(-50%, -150%);
+						}
+
+						& > span {
+							top: 20%;
+							transform: translateY(-50%) rotate(0);
+							font-size: 8rem;
+						}
+					}
+					&.rotate {
+						& > span {
+							transform: translateY(130%) rotate(95deg);
+						}
+					}
+
+					& > span {
+						writing-mode: horizontal-tb;
+						display: inline-block;
+						transform: rotate(0);
+						white-space: nowrap;
+					}
+				}
+			}
+
+			@include Responsive(SM) {
+				flex-direction: row;
+			}
+			@include Responsive(MD) {
+				flex-direction: row;
+			}
+		}
+
+		@include Responsive(SM) {
+			left: $side-bar-width-tab;
+		}
+		@include Responsive(MD) {
+			left: $side-bar-width-pc;
+		}
+	}
+
+	.contact {
+		position: fixed;
+		bottom: 5rem;
+		right: 5rem;
+		width: 5rem;
+		height: 5rem;
+		border-radius: 50%;
+		background-image: $grdi5;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.3s ease;
+		&.active,
+		&:hover {
+			&::after {
+				display: block;
+			}
+
+			.contact-panel {
+				display: flex;
+			}
+		}
+		&::after {
+			content: '';
+			position: absolute;
+			width: 15rem;
+			height: 5rem;
+			top: -3rem;
+			display: none;
+			z-index: -1;
+		}
+
+		&-panel {
+			position: absolute;
+			top: -6rem;
+			height: 5rem;
+			display: none;
+			align-items: center;
+			justify-content: center;
+			border-radius: 2rem;
+			transition: all 0.3s ease;
+
+			& > .item {
+				width: 5rem;
+				height: 5rem;
+				border-radius: 50%;
+				margin: 1.2rem;
+
+				& > a {
+					display: block;
+					width: 100%;
+					height: 100%;
+					font-size: 4.5rem;
+					color: transparent;
+					background-clip: text;
+					-webkit-background-clip: text;
+					background-image: $grdi1;
+				}
+			}
+		}
+
+		@include Responsive(SM) {
+		}
+		@include Responsive(MD) {
+		}
+	}
+}

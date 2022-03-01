@@ -1,0 +1,61 @@
+// Variables
+$XS: 480px;
+$SM: 768px;
+$MD: 1024px;
+$XL: 1170px;
+
+$side-bar-width: 100vw;
+$side-bar-width-tab: 30rem;
+$side-bar-width-pc: 26rem;
+$header-height: 10rem;
+
+// <-- Colors -->
+$grdi1: linear-gradient(to right, #5e42a6, #b74e91);
+$grdi2: linear-gradient(319deg, #b199f3, #e59ebc);
+$grdi3: linear-gradient(45deg, #bd71d0, #d8707e);
+$grdi4: linear-gradient(347deg, #fbda61, #ff5acd);
+$grdi5: linear-gradient(-45deg, #d9afd9, #97d9e1);
+$grdi6: linear-gradient(-45deg, #f8badc, #ff6e7f);
+$grdi7: linear-gradient(-45deg, #97d9e1, #ff6e7f);
+$grdi8: linear-gradient(-45deg, #6844d8, #9bebf5);
+$grdi9: linear-gradient(to right, #12fff7, #b3ffab);
+$grdi10: linear-gradient(45deg, #fc6c8f, #ffb86c);
+$grdi11: linear-gradient(45deg, #feb248, #fa4e60);
+$grdi12: linear-gradient(-45deg, #b46fff, #f53b67);
+$grdi13: linear-gradient(45deg, #4ac29a, #bdfff3);
+$grdi14: linear-gradient(90deg, #24c6dc, #837cca);
+$grdi15: linear-gradient(45deg, #5eaaea, #56e2cc);
+$grdi16: linear-gradient(
+	-135deg,
+	#fc6c8f,
+	#ff2ced,
+	#ffb86c,
+	#2cccff,
+	#20e3b2,
+	#ffcc70,
+	#c850c0,
+	#4158d0
+);
+
+$text-color: black;
+
+// Responsive
+@mixin Responsive($size) {
+	@if $size == XS {
+		@media only screen and (min-width: $XS) {
+			@content;
+		}
+	} @else if $size == SM {
+		@media only screen and (min-width: $SM) {
+			@content;
+		}
+	} @else if $size == MD {
+		@media only screen and (min-width: $MD) {
+			@content;
+		}
+	} @else if $size == XL {
+		@media only screen and (min-width: $XL) {
+			@content;
+		}
+	}
+}
