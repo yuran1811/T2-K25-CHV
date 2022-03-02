@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400&display=swap');
 
 *,
 *::before,
@@ -40,5 +40,10 @@ a:visited,
 a:hover,
 a:active,
 a:focus {
+	text-decoration: none;
 	color: transparent;
+}
+
+input {
+	outline: none;
 }
