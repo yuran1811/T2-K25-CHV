@@ -436,7 +436,7 @@ canvas {
 				}
 			}
 		}
-		.member {
+		.members {
 			$searchbar-sz: 5rem;
 
 			display: flex;
@@ -444,7 +444,7 @@ canvas {
 			justify-content: start;
 			flex-direction: column;
 			&.show {
-				.member-recent {
+				.members-recent {
 					.recent-switch {
 						.show-content {
 							display: inline-block;
@@ -458,7 +458,7 @@ canvas {
 					}
 				}
 
-				.member-list {
+				.members-list {
 					max-height: 52rem;
 				}
 			}
@@ -484,11 +484,9 @@ canvas {
 					position: absolute;
 					inset: 0;
 					&-input {
-						position: absolute;
-						top: 0;
-						left: 0;
 						height: $searchbar-sz;
 						width: calc(100% - #{$searchbar-sz});
+						max-width: 40rem;
 						border-radius: 2rem 0 0 2rem;
 						font-size: 2.2rem;
 						padding: 1rem;
@@ -498,9 +496,6 @@ canvas {
 					}
 					&-btn {
 						cursor: pointer;
-						position: absolute;
-						top: 0;
-						right: 0;
 						width: $searchbar-sz;
 						height: $searchbar-sz;
 						background-image: $grdi6;
