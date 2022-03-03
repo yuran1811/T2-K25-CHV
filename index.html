@@ -4,120 +4,23 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<!-- <link rel="shortcut icon" href="" type="image/x-icon"> -->
-		<!-- CDN -->
+		<link
+			rel="shortcut icon"
+			href="./src/img/logo.jpg"
+			type="image/x-icon"
+		/>
 		<link
 			rel="stylesheet"
 			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
 		/>
-		<!-- Internal Resources -->
 		<link rel="stylesheet" href="./src/css/index.css" />
 		<title>CHV - T2 K25</title>
 	</head>
 	<body>
 		<canvas></canvas>
-		<div id="app" class="mini">
-			<div class="header">
-				<button class="switch-btn"></button>
-				<div class="header-title">CHV - T2 - K25</div>
-			</div>
-
-			<div class="sidebar">
-				<ul class="items">
-					<li class="item"><span class="label">Home</span></li>
-					<li class="item"><span class="label">About</span></li>
-					<li class="item"><span class="label">Members</span></li>
-					<li class="item"><span class="label">Gallery</span></li>
-					<li class="item"><span class="label">Timetable</span></li>
-					<li class="item"><span class="label">AIO Links</span></li>
-				</ul>
-			</div>
-
-			<div class="content">
-				<div class="section home">
-					<ul class="items">
-						<li class="item" data-sectionid="members">
-							<button><span>Go</span></button>
-							<span class="label">Members</span>
-						</li>
-						<li class="item" data-sectionid="gallery">
-							<button><span>Go</span></button>
-							<span class="label">Gallery</span>
-						</li>
-						<li class="item" data-sectionid="timetable">
-							<button><span>Go</span></button>
-							<span class="label">Timetable</span>
-						</li>
-						<li class="item" data-sectionid="aio">
-							<button><span>Go</span></button>
-							<span class="label">AIO Links</span>
-						</li>
-					</ul>
-				</div>
-
-				<div class="section about"></div>
-
-				<div class="section members">
-					<div class="members-search">
-						<input
-							class="search-input"
-							type="text"
-							placeholder="Type name"
-						/>
-						<button class="search-btn"></button>
-					</div>
-
-					<div class="members-recent">
-						<button class="recent-switch">
-							<div class="show-content">Show recent</div>
-							<div class="hide-content">Hide recent</div>
-						</button>
-						<div class="recent-list">
-							<div class="swiper-container">
-								<div class="swiper-wrapper"></div>
-							</div>
-						</div>
-					</div>
-
-					<div class="horizon-bar"></div>
-
-					<div class="members-list">
-						<div class="list-header">Members</div>
-						<div class="list-container"></div>
-					</div>
-				</div>
-
-				<div class="section gallery"></div>
-
-				<div class="section timetable"></div>
-
-				<div class="section aio"></div>
-			</div>
-
-			<div class="contact">
-				<ul class="contact-panel items">
-					<li class="item">
-						<a
-							target="_blank"
-							rel="noopener"
-							href="https://www.facebook.com/T2.K25.CHV"
-						>
-							<i class="bi bi-facebook"></i>
-						</a>
-					</li>
-					<li class="item">
-						<a
-							target="_blank"
-							rel="noopener"
-							href="mailto:lopt2hv2023@gmail.com"
-						>
-							<i class="bi bi-envelope"></i>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
+		<div id="app" class="mini"></div>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
+		<script src="./src/js/render.js"></script>
 		<script src="./src/js/particle.js"></script>
 		<script src="./src/js/index.js"></script>
 	</body>

@@ -12,12 +12,13 @@ const switchBtn = document.querySelector('.header .switch-btn');
 const sidebarPanel = document.querySelector('.sidebar');
 switchBtn.addEventListener('click', () => app.classList.toggle('mini'));
 
-// Swiper Generator
-
+// Members Section Handles
 const members = [
 	{
 		id: 1,
+		class: 'T2',
 		name: 'Ha Minh Chau',
+		vi_name: 'Hà Minh Châu',
 		desc: 'I am a buffalo!',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:chauhm.t2.2023@gmail.com',
@@ -25,7 +26,9 @@ const members = [
 	},
 	{
 		id: 2,
+		class: 'T2',
 		name: 'Nguyen Thi Hong Dung',
+		vi_name: 'Nguyễn Thị Hồng Dung',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:dungnth.t2.2023@gmail.com',
@@ -33,7 +36,9 @@ const members = [
 	},
 	{
 		id: 3,
+		class: 'T2',
 		name: 'Dinh Tien Dung',
+		vi_name: 'Đinh Tiến Dũng',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:dungdt.t2.2023@gmail.com',
@@ -41,7 +46,9 @@ const members = [
 	},
 	{
 		id: 4,
+		class: 'T2',
 		name: 'Huynh Binh Duong',
+		vi_name: 'Huỳnh Bình Dương',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:duonghb.t2.2023@gmail.com',
@@ -49,7 +56,9 @@ const members = [
 	},
 	{
 		id: 5,
+		class: 'T2',
 		name: 'Le Nguyen Anh Duy',
+		vi_name: 'Lê Nguyễn Anh Duy',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:duylna.t2.2023@gmail.com',
@@ -57,7 +66,9 @@ const members = [
 	},
 	{
 		id: 6,
-		name: 'Vu Tran Thu ha',
+		class: 'T2',
+		name: 'Vu Tran Thu Ha',
+		vi_name: 'Vũ Trần Thu Hà',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:havtt.t2.2023@gmail.com',
@@ -65,7 +76,9 @@ const members = [
 	},
 	{
 		id: 7,
+		class: 'T2',
 		name: 'Tran Huy Hoang',
+		vi_name: 'Trần Huy Hoàng',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:hoangth.t2.2023@gmail.com',
@@ -73,7 +86,9 @@ const members = [
 	},
 	{
 		id: 8,
+		class: 'T2',
 		name: 'Nguyen Bach Khoa',
+		vi_name: 'Nguyễn Bách Khoa',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:khoanb.t2.2023@gmail.com',
@@ -81,7 +96,9 @@ const members = [
 	},
 	{
 		id: 9,
+		class: 'T2',
 		name: 'Le Trung Kien',
+		vi_name: 'Lê Trung Kiên',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:kienlt.t2.2023@gmail.com',
@@ -89,7 +106,9 @@ const members = [
 	},
 	{
 		id: 10,
+		class: 'T2',
 		name: 'Luong Thanh Loc',
+		vi_name: 'Lương Thành Lộc',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:loclt.t2.2023@gmail.com',
@@ -97,7 +116,9 @@ const members = [
 	},
 	{
 		id: 11,
+		class: 'T2',
 		name: 'Nguyen Doan Nhat Minh',
+		vi_name: 'Nguyễn Đoàn Nhật Minh',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:minhndn.t2.2023@gmail.com',
@@ -105,7 +126,9 @@ const members = [
 	},
 	{
 		id: 12,
+		class: 'T2',
 		name: 'Nguyen Phuoc Dang Minh',
+		vi_name: 'Nguyễn Phước Đăng Minh',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:minhnpd.t2.2023@gmail.com',
@@ -113,7 +136,9 @@ const members = [
 	},
 	{
 		id: 13,
+		class: 'T2',
 		name: 'Nguyen Son Thanh Ngan',
+		vi_name: 'Nguyễn Sơn Thanh Ngân',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:ngannst.t2.2023@gmail.com',
@@ -121,7 +146,9 @@ const members = [
 	},
 	{
 		id: 14,
+		class: 'T2',
 		name: 'Do Bao Ngoc',
+		vi_name: 'Đỗ Bảo Ngọc',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:ngocdb.t2.2023@gmail.com',
@@ -129,7 +156,9 @@ const members = [
 	},
 	{
 		id: 15,
+		class: 'T2',
 		name: 'Tran Quoc Nhat',
+		vi_name: 'Trần Quốc Nhật',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:nhattq.t2.2023@gmail.com',
@@ -137,7 +166,9 @@ const members = [
 	},
 	{
 		id: 16,
+		class: 'T2',
 		name: 'Tran Thi Tuyet Nhu',
+		vi_name: 'Trần Thị Tuyết Như',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:nhuttt.t2.2023@gmail.com',
@@ -145,7 +176,9 @@ const members = [
 	},
 	{
 		id: 17,
+		class: 'T2',
 		name: 'Dang Quan Phu',
+		vi_name: 'Đặng Quan Phú',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:phudq.t2.2023@gmail.com',
@@ -153,7 +186,9 @@ const members = [
 	},
 	{
 		id: 18,
+		class: 'T2',
 		name: 'Vu Nguyen Minh Quang',
+		vi_name: 'Vũ Nguyễn Minh Quang',
 		desc: 'Ahihi do ngu',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:quangvnm.t2.2023@gmail.com',
@@ -161,7 +196,9 @@ const members = [
 	},
 	{
 		id: 19,
+		class: 'T2',
 		name: 'Nguyen Cam Tho',
+		vi_name: 'Nguyễn Cẩm Thơ',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:thonc.t2.2023@gmail.com',
@@ -169,7 +206,9 @@ const members = [
 	},
 	{
 		id: 20,
+		class: 'T2',
 		name: 'Khuong Ngoc Toan',
+		vi_name: 'Khương Ngọc Toàn',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:toankn.t2.2023@gmail.com',
@@ -177,7 +216,9 @@ const members = [
 	},
 	{
 		id: 21,
+		class: 'T2',
 		name: 'Nguyen Thi Huyen Trang',
+		vi_name: 'Nguyễn Thị Huyền Trang',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:trangnth.t2.2023@gmail.com',
@@ -185,7 +226,9 @@ const members = [
 	},
 	{
 		id: 22,
+		class: 'T2',
 		name: 'Ngo Minh Tri',
+		vi_name: 'Ngô Minh Trí',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:trinm.t2.2023@gmail.com',
@@ -193,7 +236,9 @@ const members = [
 	},
 	{
 		id: 23,
+		class: 'T2',
 		name: 'Truong Hoang Y',
+		vi_name: 'Trương Hoàng Ý',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:yth.t2.2023@gmail.com',
@@ -201,7 +246,9 @@ const members = [
 	},
 	{
 		id: 24,
+		class: 'T2',
 		name: 'Tran Hoang Ngoc Yen',
+		vi_name: 'Trần Hoàng Ngọc Yến',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:yenthn.t2.2023@gmail.com',
@@ -209,7 +256,9 @@ const members = [
 	},
 	{
 		id: 25,
+		class: 'Ti',
 		name: 'Dang Minh Anh',
+		vi_name: 'Đặng Minh Ánh',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:anhdm.ti.2023@gmail.com',
@@ -217,7 +266,9 @@ const members = [
 	},
 	{
 		id: 26,
+		class: 'Ti',
 		name: 'Tang Xuan Bac',
+		vi_name: 'Tăng Xuân Bắc',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:bactx.ti.2023@gmail.com',
@@ -225,7 +276,9 @@ const members = [
 	},
 	{
 		id: 27,
+		class: 'Ti',
 		name: 'Ly Gia Binh',
+		vi_name: 'Lý Gia Bình',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:binhlg.ti.2023@gmail.com',
@@ -233,7 +286,9 @@ const members = [
 	},
 	{
 		id: 28,
-		name: 'Dao Tuan DUy',
+		class: 'Ti',
+		name: 'Dao Tuan Duy',
+		vi_name: 'Đào Tuấn Duy',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:duydt.ti.2023@gmail.com',
@@ -241,7 +296,9 @@ const members = [
 	},
 	{
 		id: 29,
+		class: 'Ti',
 		name: 'Trinh Chan Duy',
+		vi_name: 'Trịnh Chấn Duy',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:duytc.ti.2023@gmail.com',
@@ -249,7 +306,9 @@ const members = [
 	},
 	{
 		id: 30,
+		class: 'Ti',
 		name: 'Tran Le Van Khanh',
+		vi_name: 'Trần Lê Vân Khanh',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:khanhtlv.ti.2023@gmail.com',
@@ -257,7 +316,9 @@ const members = [
 	},
 	{
 		id: 31,
-		name: 'Ngo Nguyen The Khoa',
+		class: 'Ti',
+		name: 'Yuran Legends',
+		vi_name: 'Ngô Nguyễn Thế Khoa',
 		desc: 'Nothing can stop me !!!',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:trieuvanbd123@gmail.com',
@@ -265,7 +326,9 @@ const members = [
 	},
 	{
 		id: 32,
+		class: 'Ti',
 		name: 'Nguyen Dinh Manh',
+		vi_name: 'Nguyễn Đình Mạnh',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'manhnd.ti.2023@gmail.com',
@@ -273,7 +336,9 @@ const members = [
 	},
 	{
 		id: 33,
+		class: 'Ti',
 		name: 'Tran Quang Thanh',
+		vi_name: 'Trần Quang Thành',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:thanhtq.ti.2023@gmail.com',
@@ -281,7 +346,9 @@ const members = [
 	},
 	{
 		id: 34,
+		class: 'Ti',
 		name: 'Huynh Duc Tin',
+		vi_name: 'Huỳnh Đức Tín',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:tinhd.ti.2023@gmail.com',
@@ -289,7 +356,9 @@ const members = [
 	},
 	{
 		id: 35,
+		class: 'Ti',
 		name: 'Le Hong Vu',
+		vi_name: 'Lê Hồng Vũ',
 		desc: '',
 		photo: './src/img/ava1.jpg',
 		email: 'mailto:vulh.ti.2023@gmail.com',
@@ -304,10 +373,10 @@ const { fbIco, mailIco } = icons;
 
 const getHTMLS = (list, type = 0) =>
 	list.map((item) => {
-		const { name, desc, photo, email, facebook } = item;
+		const { name, vi_name, desc, photo, email, facebook } = item;
 		const infoHTML = `
 			<div class="info-container">
-				<div class="name">${name}</div>
+				<div class="name">${vi_name}</div>
 				${!type ? `<div class="desc">${desc}</div>` : ''}
 			</div>`;
 		const socialHTML = `
@@ -339,7 +408,6 @@ const getHTMLS = (list, type = 0) =>
 		return htmls;
 	});
 
-// Members Section Handles
 const swiperWrapper = $('.members-recent .recent-list .swiper-wrapper');
 getHTMLS(members, 1).forEach((item) => {
 	swiperWrapper.insertAdjacentHTML('beforeend', item);
@@ -382,8 +450,12 @@ searchMembers.oninput = (e) => {
 		return;
 	}
 
-	const newList = members.filter((item) =>
-		item.name.toLowerCase().includes(value)
+	const newList = members.filter(
+		(item) =>
+			item.id == value ||
+			item.class.toLowerCase() === value ||
+			item.name.toLowerCase().includes(value) ||
+			item?.vi_name?.toLowerCase()?.includes(value)
 	);
 	memberList.innerHTML = getHTMLS(newList);
 };
@@ -395,6 +467,17 @@ recentSwitch.onclick = () =>
 
 // Links Handles
 const hideList = (list) => list.forEach((item) => item.classList.add('hide'));
+const addBlankInfo = (list) => {
+	list.forEach((item) => {
+		if (!item.innerHTML)
+			item.innerHTML += `
+	<div style="
+		text-align: center;
+		font-size: 4rem;
+		color: black;
+	">No Info</div>`;
+	});
+};
 
 const sidebarItems = document.querySelectorAll('.sidebar .item');
 const contentItems = document.querySelectorAll('.content .item');
@@ -430,3 +513,5 @@ contentItems.forEach((ctent) => {
 
 hideList(contentSections);
 contentSections[0].classList.remove('hide');
+
+addBlankInfo(contentSections);
