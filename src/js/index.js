@@ -8,11 +8,31 @@ const selectAll = (par, child) => par.querySelectorAll(child);
 
 const app = document.querySelector('#app');
 
+const defaultConfig = {
+	ava: './src/img/ava1.jpg',
+};
+
+// Menu Switch
 const switchBtn = document.querySelector('.header .switch-btn');
 const sidebarPanel = document.querySelector('.sidebar');
-switchBtn.addEventListener('click', () => app.classList.toggle('mini'));
+switchBtn.onclick = (e) => {
+	e.stopPropagation();
+	app.classList.toggle('mini');
+};
 
 // Members Section Handles
+const teacher = [
+	{
+		name: 'To Thi Hong',
+		vi_name: 'Tô Thị Hồng',
+		class: 'GVCN',
+	},
+	{
+		name: 'Nguyen Van Cuong',
+		vi_name: 'Nguyễn Văn Cường',
+		class: 'GVCN',
+	},
+];
 const members = [
 	{
 		id: 1,
@@ -377,7 +397,7 @@ const getHTMLS = (list, type = 0) =>
 		const infoHTML = `
 			<div class="info-container">
 				<div class="name">${vi_name}</div>
-				${!type ? `<div class="desc">${desc}</div>` : ''}
+				${!type && desc ? `<div class="desc">${desc}</div>` : ''}
 			</div>`;
 		const socialHTML = `
 			<div class="social-container">
@@ -395,27 +415,23 @@ const getHTMLS = (list, type = 0) =>
 				</ul>
 			</div>`;
 		const htmls = `
-				<div class="swiper-slide">
-					<div class="card" data-memberid="${item.id}">
-						<div
-							class="card-img"
-							style="background-image: url(${photo})">
-						</div>
-						${infoHTML}
-						${!type ? socialHTML : ''}
+			<div class="swiper-slide">
+				<div class="card" data-memberid="${item.id}">
+					<div
+						class="card-img"
+						style="background-image: url(${photo || defaultConfig.ava})">
 					</div>
-				</div>`;
+					${infoHTML}
+					${!type ? socialHTML : ''}
+				</div>
+			</div>`;
 		return htmls;
 	});
 
-const swiperWrapper = $('.members-recent .recent-list .swiper-wrapper');
-getHTMLS(members, 1).forEach((item) => {
-	swiperWrapper.insertAdjacentHTML('beforeend', item);
-});
-
 const memberList = document.querySelector('.members-list .list-container');
+const swiperWrapper = $('.members-recent .recent-list .swiper-wrapper');
 memberList.innerHTML = getHTMLS(members).join('');
-
+swiperWrapper.innerHTML += getHTMLS(members.slice(0, 5), 1).join('');
 new Swiper('.members-recent .recent-list .swiper-container', {
 	direction: 'horizontal',
 	centeredSlides: false,
@@ -446,7 +462,7 @@ const searchMembers = document.querySelector('.members-search .search-input');
 searchMembers.oninput = (e) => {
 	const value = e.target.value.trim().toLowerCase();
 	if (!value) {
-		memberList.innerHTML = getHTMLS(members);
+		memberList.innerHTML = getHTMLS(members).join('');
 		return;
 	}
 
@@ -457,7 +473,7 @@ searchMembers.oninput = (e) => {
 			item.name.toLowerCase().includes(value) ||
 			item?.vi_name?.toLowerCase()?.includes(value)
 	);
-	memberList.innerHTML = getHTMLS(newList);
+	memberList.innerHTML = getHTMLS(newList).join('');
 };
 
 // Recent Switch Btn
@@ -469,18 +485,17 @@ recentSwitch.onclick = () =>
 const hideList = (list) => list.forEach((item) => item.classList.add('hide'));
 const addBlankInfo = (list) => {
 	list.forEach((item) => {
-		if (!item.innerHTML)
-			item.innerHTML += `
-	<div style="
-		text-align: center;
-		font-size: 4rem;
-		color: black;
-	">No Info</div>`;
+		if (item.innerHTML) return;
+		item.innerHTML = `
+		<div class="blank-container">
+			<div class="blank-title">No Info</div>
+			<button class="blank-btn">Return Home</button>
+		</div>`;
 	});
 };
 
 const sidebarItems = document.querySelectorAll('.sidebar .item');
-const contentItems = document.querySelectorAll('.content .item');
+const homeContentItems = document.querySelectorAll('.home .item');
 const contentSections = document.querySelectorAll('.content .section');
 
 sidebarItems.forEach((item, index) => {
@@ -491,8 +506,8 @@ sidebarItems.forEach((item, index) => {
 	};
 });
 
-contentItems.forEach((ctent) => {
-	ctent.querySelector('button').onclick = (e) => {
+homeContentItems.forEach((ctent) => {
+	ctent.querySelector('button').onclick = () => {
 		hideList(contentSections);
 		contentSections.forEach((section) => {
 			if (section.className.includes(ctent.dataset.sectionid))
@@ -501,17 +516,27 @@ contentItems.forEach((ctent) => {
 	};
 
 	ctent.addEventListener('mouseover', (e) => {
-		contentItems.forEach((x) =>
+		homeContentItems.forEach((x) =>
 			x.classList.toggle('rotate', x !== e.currentTarget)
 		);
 	});
 
-	ctent.addEventListener('mouseleave', (e) => {
-		contentItems.forEach((x) => x.classList.remove('rotate'));
-	});
+	ctent.addEventListener('mouseleave', () =>
+		homeContentItems.forEach((x) => x.classList.remove('rotate'))
+	);
 });
 
-hideList(contentSections);
-contentSections[0].classList.remove('hide');
+const resetUI = () => {
+	hideList(contentSections);
+	contentSections[0].classList.remove('hide');
+};
+resetUI();
 
 addBlankInfo(contentSections);
+$$('.blank-btn').forEach((item) => (item.onclick = resetUI));
+
+const pageHeader = $('.header');
+pageHeader.onclick = () => {
+	app.classList.add('mini');
+	resetUI();
+};

@@ -7,13 +7,13 @@
 		'Timetable',
 		'AIO',
 	];
-	const homeData = ['Members', 'Gallery', 'Timetable', 'AIO'];
 	const contents = [
 		{
 			name: 'home',
 			content: `
 			<ul class="items">
-				${homeData
+				${sidebars
+					.slice(2)
 					.map(
 						(item) => `
 						<li class="item" data-sectionid="${item.toLowerCase()}">
@@ -24,23 +24,31 @@
 					.join('')}
 			</ul>`,
 		},
-		{ name: 'about', content: `` },
+		{
+			name: 'about',
+			content: `
+			<div class="about-container">
+				<div class="about-title">About</div>
+				<div class="about-content">
+					<p class="item">We are T2 - K25 CHV</p>
+					<p class="item">Thanks for visiting our site!!!</p>
+				</div>
+				<div class="about-footer">
+					Made by <a href="https://www.facebook.com/YuranLegends/" class="link-hl" target="_blank" rel="noopener">Yuran Legends</a>
+				</div>
+			</div>`,
+		},
 		{
 			name: 'members',
 			content: `
 			<div class="members-search">
-				<input
-					class="search-input"
-					type="text"
-					placeholder="Type name"
-				/>
+				<input class="search-input" type="text" placeholder="Type name"/>
 				<button class="search-btn"></button>
 			</div>
-
 			<div class="members-recent">
 				<button class="recent-switch">
-					<div class="show-content">Show recent</div>
-					<div class="hide-content">Hide recent</div>
+					<div class="show-content"><span>Show recent</span></div>
+					<div class="hide-content"><span>Hide recent</span></div>
 				</button>
 				<div class="recent-list">
 					<div class="swiper-container">
@@ -48,9 +56,7 @@
 					</div>
 				</div>
 			</div>
-
 			<div class="horizon-bar"></div>
-
 			<div class="members-list">
 				<div class="list-header">Members</div>
 				<div class="list-container"></div>
@@ -75,7 +81,7 @@
 	const HEADER = `
 	<div class="header">
 		<button class="switch-btn"></button>
-		<div class="header-title">CHV - T2 - K25</div>
+		<div class="header-title">T2 - K25 CHV</div>
 	</div>`;
 	const SIDEBAR = `
 	<div class="sidebar">
