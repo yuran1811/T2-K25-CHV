@@ -4,7 +4,7 @@
 
 	const NUM_PARTICLES = innerWidth / 40;
 	const PARTICLE_RADIUS = 8;
-	const PARTICLE_COLOR = 'black';
+	const PARTICLE_COLOR = 'rgba(200, 200, 200, 1)';
 
 	canvas.height = innerHeight;
 	canvas.width = innerWidth;
@@ -78,9 +78,13 @@
 		for (let i = 1; i <= NUM_PARTICLES; i++) {
 			const x = Math.random() * innerWidth;
 			const y = Math.random() * innerHeight;
+			const randNum = {
+				x: Math.random() * 4 - 2,
+				y: Math.random() * 4 - 2,
+			};
 			const velocity = {
-				x: Math.random() * 6 - 3,
-				y: Math.random() * 6 - 3,
+				x: randNum.x ? randNum.x : Math.random() * 2 + 1,
+				y: randNum.y ? randNum.y : Math.random() * 2 + 1,
 			};
 			particles.push(
 				new Particle(x, y, PARTICLE_RADIUS, PARTICLE_COLOR, velocity)
