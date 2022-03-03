@@ -328,7 +328,7 @@ canvas {
 							top: 10%;
 							transform: translateY(-50%);
 							font-size: 4.2rem;
-							font-weight: bold;
+							font-weight: 300;
 						}
 					}
 
@@ -465,6 +465,7 @@ canvas {
 
 			.horizon-bar {
 				position: relative;
+				max-width: 105rem;
 				width: 100%;
 				left: 0;
 				right: 0;
@@ -556,6 +557,19 @@ canvas {
 									flex-shrink: 0;
 
 									@extend %cardUI;
+									.card {
+										height: 10rem;
+
+										.info-container {
+											padding: 0;
+											margin: auto;
+
+											.name,
+											.desc {
+												padding: 0.7rem;
+											}
+										}
+									}
 								}
 							}
 						}
@@ -565,6 +579,7 @@ canvas {
 			&-list {
 				position: relative;
 				width: 100%;
+				max-width: 110rem;
 				max-height: 40rem;
 				padding: 1rem;
 				overflow: hidden auto;
@@ -584,6 +599,7 @@ canvas {
 				.list-container {
 					position: relative;
 					bottom: 3rem;
+					padding: 2rem 0 5rem;
 					display: flex;
 					flex-wrap: wrap;
 					align-items: center;
@@ -601,11 +617,6 @@ canvas {
 			font-size: 2.3rem;
 			a {
 				color: black;
-			}
-			td {
-				padding: 0.5rem;
-				border-top: 0.3rem solid black;
-				border-right: 0.3rem solid black;
 			}
 		}
 
