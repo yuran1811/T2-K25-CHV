@@ -2,8 +2,8 @@
 @import 'reset';
 
 /* 
-@include Responsive(SM) {}
-@include Responsive(MD) {}
+@include Responsive($SM) {}
+@include Responsive($MD) {}
 */
 
 %cardUI {
@@ -113,538 +113,568 @@
 	}
 }
 
-canvas {
-	position: fixed;
-	inset: 0;
-	border: none;
-	outline: none;
-	display: none;
-	z-index: -1;
-	@include Responsive(MD) {
-		display: block;
-	}
-}
-
-.link-hl {
-	position: relative;
-	z-index: 1;
-	padding: 1rem;
-	display: inline-block;
-	&:hover::before {
-		height: 100%;
-	}
-	&::before {
-		content: '';
-		position: absolute;
-		height: 0.5rem;
-		top: unset;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		z-index: -1;
+body {
+	.loading {
+		position: fixed;
+		inset: 0;
+		background-color: black;
+		opacity: 1;
+		z-index: 10;
 		transition: all 0.3s ease;
+		&.hide {
+			opacity: 0;
+			z-index: -10;
+		}
 	}
-}
 
-#app {
-	position: absolute;
-	inset: 0;
-	&.mini {
-		.sidebar {
-			width: 0;
-			& > ul {
-				$num-items: 6;
-				@for $i from 1 through $num-items {
-					& > li:nth-child(#{$i}) {
-						transition-delay: 0s;
+	.link-hl {
+		position: relative;
+		z-index: 1;
+		padding: 1rem;
+		display: inline-block;
+		&:hover::before {
+			height: 100%;
+		}
+		&::before {
+			content: '';
+			position: absolute;
+			height: 0.5rem;
+			top: unset;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: -1;
+			transition: all 0.3s ease;
+		}
+	}
+
+	#app {
+		position: absolute;
+		inset: 0;
+		&.mini {
+			.sidebar {
+				width: 0;
+				& > ul {
+					$num-items: 6;
+					@for $i from 1 through $num-items {
+						& > li:nth-child(#{$i}) {
+							transition-delay: 0s;
+						}
+					}
+					transform: translateX(-150%);
+
+					& > li {
+						opacity: 0;
+						transform: translateX(-150%);
 					}
 				}
-				transform: translateX(-150%);
-
-				& > li {
-					opacity: 0;
-					transform: translateX(-150%);
+				& + .content {
+					left: 0;
 				}
 			}
-			& + .content {
-				left: 0;
+			.header .switch-btn {
+				background-image: $grdi10;
 			}
 		}
-		.header .switch-btn {
-			background-image: $grdi10;
-		}
-	}
 
-	.header {
-		$switch-size: 5rem;
+		.header {
+			$btn-size: 5rem;
 
-		cursor: pointer;
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		height: $header-height;
-		background-color: rgba(0, 0, 0, 0.015);
-		display: flex;
-		align-items: center;
-
-		.switch-btn {
 			cursor: pointer;
-			position: relative;
-			left: 1rem;
-			width: $switch-size;
-			height: $switch-size;
-			border-radius: 50%;
-			background-image: $grdi13;
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			height: $header-height;
+			background-color: rgba(0, 0, 0, 0.015);
+			display: flex;
+			align-items: center;
+
+			.switch-btn {
+				cursor: pointer;
+				position: relative;
+				left: 1rem;
+				width: $btn-size;
+				height: $btn-size;
+				border-radius: 50%;
+				background-image: $grdi13;
+				transition: all 0.3s ease;
+
+				@include Responsive($SM) {
+					left: 2rem;
+				}
+				@include Responsive($MD) {
+					left: 2rem;
+				}
+			}
+			&-title {
+				position: relative;
+				color: $text-color;
+				font-size: 3rem;
+				text-align: center;
+				text-transform: uppercase;
+				letter-spacing: 0.2rem;
+				padding: 1.8rem 0;
+				margin: auto;
+
+				@include Responsive($SM) {
+					padding: 2rem 0;
+					font-size: 4rem;
+					letter-spacing: 0.5rem;
+				}
+				@include Responsive($MD) {
+					padding: 2rem 0;
+					font-size: 5rem;
+					letter-spacing: 0.5rem;
+				}
+			}
+			.admin-page {
+				position: relative;
+				right: 1rem;
+				min-width: 5rem;
+				min-height: 5rem;
+				border-radius: 50%;
+				background-color: #6bdbac;
+				z-index: 1;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				span {
+					padding: 1rem 1.4rem;
+					display: none;
+					color: white;
+					font-size: 2rem;
+					text-align: center;
+				}
+
+				@include Responsive($SM) {
+					right: 2rem;
+					border-radius: 2.2rem;
+					span {
+						display: block;
+					}
+				}
+			}
+		}
+		.sidebar {
+			position: fixed;
+			top: $header-height;
+			width: $side-bar-width;
+			overflow: hidden auto;
+			max-height: calc(100vh - #{$header-height});
 			transition: all 0.3s ease;
 
-			@include Responsive(SM) {
-				left: 2rem;
+			& > ul {
+				$num-items: 6;
+
+				padding: 1rem;
+				font-size: 2rem;
+				display: flex;
+				align-items: center;
+				flex-direction: column;
+				justify-content: start;
+				transform: translateX(0);
+				transition: all 0.3s ease;
+
+				@for $i from 1 through $num-items {
+					& > li:nth-child(#{$i}) {
+						transition-delay: #{max($i / 12 - 0.1, 0)}s;
+					}
+				}
+
+				& > li {
+					padding: 3rem 0;
+					margin: 1rem 0;
+					width: 90%;
+					opacity: 1;
+					color: white;
+					text-align: center;
+					border-radius: 2.4rem;
+					background-image: $grdi2;
+					transform: translateX(0);
+					transition: all 0.3s ease;
+					cursor: pointer;
+
+					& > span {
+						font-weight: 500;
+						width: 100%;
+					}
+				}
 			}
-			@include Responsive(MD) {
-				left: 2rem;
+
+			@include Responsive($SM) {
+				width: $side-bar-width-tab;
+			}
+			@include Responsive($MD) {
+				width: $side-bar-width-pc;
 			}
 		}
-
-		&-title {
-			position: relative;
-			color: $text-color;
-			font-size: 2.4rem;
-			text-align: center;
-			text-transform: uppercase;
-			letter-spacing: 0.2rem;
-			padding: 1.8rem 0;
+		.content {
+			position: fixed;
+			top: $header-height;
+			bottom: $header-height;
+			left: $side-bar-width;
+			width: 100%;
+			font-size: 3rem;
+			padding: 2rem 5rem;
 			margin: auto;
-
-			@include Responsive(SM) {
-				padding: 2rem 0;
-				font-size: 4rem;
-				letter-spacing: 0.5rem;
-			}
-			@include Responsive(MD) {
-				padding: 2rem 0;
-				font-size: 5rem;
-				letter-spacing: 0.5rem;
-			}
-		}
-	}
-	.sidebar {
-		position: fixed;
-		top: $header-height;
-		width: $side-bar-width;
-		overflow: hidden auto;
-		max-height: calc(100vh - #{$header-height});
-		transition: all 0.3s ease;
-
-		& > ul {
-			$num-items: 6;
-
-			padding: 1rem;
-			font-size: 2rem;
 			display: flex;
 			align-items: center;
 			flex-direction: column;
-			justify-content: start;
-			transform: translateX(0);
 			transition: all 0.3s ease;
 
-			@for $i from 1 through $num-items {
-				& > li:nth-child(#{$i}) {
-					transition-delay: #{max($i / 12 - 0.1, 0)}s;
-				}
-			}
-
-			& > li {
-				padding: 3rem 0;
-				margin: 1rem 0;
-				width: 90%;
-				opacity: 1;
-				color: white;
-				text-align: center;
-				border-radius: 2.4rem;
-				background-image: $grdi2;
-				transform: translateX(0);
-				transition: all 0.3s ease;
-				cursor: pointer;
-
-				& > span {
-					font-weight: 500;
-					width: 100%;
-				}
-			}
-		}
-
-		@include Responsive(SM) {
-			width: $side-bar-width-tab;
-		}
-		@include Responsive(MD) {
-			width: $side-bar-width-pc;
-		}
-	}
-	.content {
-		position: fixed;
-		top: $header-height;
-		bottom: $header-height;
-		left: $side-bar-width;
-		width: 100%;
-		font-size: 3rem;
-		padding: 2rem 5rem;
-		margin: auto;
-		display: flex;
-		align-items: center;
-		flex-direction: column;
-		transition: all 0.3s ease;
-
-		.section {
-			position: relative;
-			width: 100%;
-			margin: auto;
-			&.hide {
-				display: none;
-			}
-		}
-		.home {
-			& > ul {
-				margin: auto;
+			.section {
+				position: relative;
 				width: 100%;
-				display: flex;
-				align-items: center;
-				flex-direction: column;
-				justify-content: center;
-				transition: all 0.2s ease;
-
-				& > li {
-					position: relative;
-					text-align: center;
-					padding: 2.4rem;
-					margin: 1rem;
+				margin: auto;
+				&.hide {
+					display: none;
+				}
+			}
+			.home {
+				& > ul {
+					margin: auto;
 					width: 100%;
-					height: 8rem;
-					max-height: 50rem;
-					border-radius: 2rem;
-					color: white;
-					background-image: $grdi2;
-					transition: all 0.7s ease;
-					overflow: hidden;
-					&:hover,
-					&.wide {
-						background: url(../img/bg1.jpg);
-						background-position: center;
-						background-size: cover;
-						object-fit: cover;
-						height: 20rem;
+					display: flex;
+					align-items: center;
+					flex-direction: column;
+					justify-content: center;
+					transition: all 0.2s ease;
+
+					& > li {
+						position: relative;
+						text-align: center;
+						padding: 2.4rem;
+						margin: 1rem;
+						width: 100%;
+						height: 8rem;
+						max-height: 50rem;
+						border-radius: 2rem;
+						color: white;
+						background-image: $grdi2;
+						transition: all 0.7s ease;
+						overflow: hidden;
+						&:hover,
+						&.wide {
+							background: url(../img/bg1.jpg);
+							background-position: center;
+							background-size: cover;
+							object-fit: cover;
+							height: 20rem;
+
+							& > button {
+								transform: translate(-50%, -2rem);
+							}
+
+							& > span {
+								top: 10%;
+								transform: translateY(-50%);
+								font-size: 4.2rem;
+								font-weight: 300;
+							}
+						}
 
 						& > button {
-							transform: translate(-50%, -2rem);
+							cursor: pointer;
+							position: absolute;
+							bottom: 0;
+							left: 50%;
+							min-width: 7rem;
+							width: 40%;
+							max-width: 22rem;
+							height: 6rem;
+							color: white;
+							font-size: 3rem;
+							padding: 2rem;
+							display: flex;
+							align-items: center;
+							justify-content: center;
+							text-align: center;
+							border-radius: 1.5rem;
+							background-image: $grdi1;
+							transition: all 0.3s ease;
+							transform: translate(-50%, 100%);
 						}
-
 						& > span {
-							top: 10%;
-							transform: translateY(-50%);
-							font-size: 4.2rem;
-							font-weight: 300;
+							position: relative;
+							top: 0;
+							font-weight: 100;
+							transform: translateY(0);
+							transition: all 0.3s ease;
 						}
-					}
 
-					& > button {
-						cursor: pointer;
-						position: absolute;
-						bottom: 0;
-						left: 50%;
-						min-width: 7rem;
-						width: 40%;
-						max-width: 22rem;
-						height: 6rem;
-						color: white;
-						font-size: 3rem;
-						padding: 2rem;
-						display: flex;
-						align-items: center;
-						justify-content: center;
-						text-align: center;
-						border-radius: 1.5rem;
-						background-image: $grdi1;
-						transition: all 0.3s ease;
-						transform: translate(-50%, 100%);
-					}
-					& > span {
-						position: relative;
-						top: 0;
-						font-weight: 100;
-						transform: translateY(0);
-						transition: all 0.3s ease;
-					}
+						@include Responsive($SM) {
+							width: 10rem;
+							height: 50vh;
+							&:hover,
+							&.wide {
+								width: 100%;
+								height: 50vh;
 
-					@include Responsive(SM) {
-						width: 10rem;
-						height: 50vh;
-						&:hover,
-						&.wide {
+								& > button {
+									bottom: 0;
+									transform: translate(-50%, -7rem);
+								}
+
+								& > span {
+									top: 20%;
+									transform: translateY(-50%);
+									font-size: 6rem;
+									writing-mode: horizontal-tb;
+								}
+							}
+
+							& > span {
+								writing-mode: vertical-rl;
+							}
+						}
+						@include Responsive($MD) {
 							width: 100%;
+							min-height: 38rem;
 							height: 50vh;
+							margin-left: 0;
+							margin-right: 0;
+							border-radius: 0;
+							clip-path: polygon(
+								5rem 0%,
+								100% 0%,
+								calc(100% - 5rem) 100%,
+								0% 100%
+							);
+							&:hover,
+							&.wide {
+								width: 550%;
+								height: 50vh;
 
-							& > button {
-								bottom: 0;
-								transform: translate(-50%, -200%);
+								& > button {
+									bottom: 0;
+									transform: translate(-50%, -150%);
+								}
+
+								& > span {
+									top: 20%;
+									transform: translateY(-50%) rotate(0);
+									font-size: 8rem;
+								}
+							}
+							&.rotate {
+								& > span {
+									transform: translateY(130%) rotate(95deg);
+								}
 							}
 
 							& > span {
-								top: 20%;
-								transform: translateY(-50%);
-								font-size: 6rem;
 								writing-mode: horizontal-tb;
+								display: inline-block;
+								transform: rotate(0);
+								white-space: nowrap;
 							}
-						}
-
-						& > span {
-							writing-mode: vertical-rl;
 						}
 					}
-					@include Responsive(MD) {
-						width: 100%;
-						min-height: 38rem;
-						height: 50vh;
-						margin-left: 0;
-						margin-right: 0;
-						border-radius: 0;
-						clip-path: polygon(
-							5rem 0%,
-							100% 0%,
-							calc(100% - 5rem) 100%,
-							0% 100%
-						);
-						&:hover,
-						&.wide {
-							width: 550%;
-							height: 50vh;
 
-							& > button {
-								bottom: 0;
-								transform: translate(-50%, -150%);
-							}
-
-							& > span {
-								top: 20%;
-								transform: translateY(-50%) rotate(0);
-								font-size: 8rem;
-							}
-						}
-						&.rotate {
-							& > span {
-								transform: translateY(130%) rotate(95deg);
-							}
-						}
-
-						& > span {
-							writing-mode: horizontal-tb;
-							display: inline-block;
-							transform: rotate(0);
-							white-space: nowrap;
-						}
+					@include Responsive($SM) {
+						flex-direction: row;
 					}
-				}
-
-				@include Responsive(SM) {
-					flex-direction: row;
-				}
-				@include Responsive(MD) {
-					flex-direction: row;
+					@include Responsive($MD) {
+						flex-direction: row;
+					}
 				}
 			}
-		}
-		.about {
-			.about-container {
-				display: flex;
-				align-items: center;
-				flex-direction: column;
-				justify-content: center;
-				.about {
-					&-title {
-						width: 100%;
-						padding: 1rem;
-						margin: 1rem 0;
-						font-size: 4rem;
-						font-weight: 600;
-						text-align: center;
-					}
-					&-content {
-						display: flex;
-						align-items: center;
-						flex-direction: column;
-						justify-content: center;
-						width: 100%;
-						.item {
-							text-align: center;
+			.about {
+				.about-container {
+					display: flex;
+					align-items: center;
+					flex-direction: column;
+					justify-content: center;
+					.about {
+						&-title {
+							width: 100%;
 							padding: 1rem;
-						}
-						@include Responsive(SM) {
-							width: 90%;
-						}
-					}
-					&-footer {
-						margin: 1rem;
-						padding: 1rem;
-						font-weight: 500;
-						text-align: center;
-						color: transparent;
-						background-clip: text;
-						-webkit-background-clip: text;
-						background-image: $grdi3;
-
-						& > a {
+							margin: 1rem 0;
+							font-size: 4rem;
 							font-weight: 600;
+							text-align: center;
+						}
+						&-content {
+							display: flex;
+							align-items: center;
+							flex-direction: column;
+							justify-content: center;
+							width: 100%;
+							.item {
+								text-align: center;
+								padding: 1rem;
+							}
+							@include Responsive($SM) {
+								width: 90%;
+							}
+						}
+						&-footer {
+							margin: 1rem;
+							padding: 1rem;
+							font-weight: 500;
+							text-align: center;
 							color: transparent;
 							background-clip: text;
 							-webkit-background-clip: text;
 							background-image: $grdi3;
-							transition: all 0.3s ease;
-							&:hover {
-								color: white;
-							}
-							&::before {
+
+							& > a {
+								font-weight: 600;
+								color: transparent;
+								background-clip: text;
+								-webkit-background-clip: text;
 								background-image: $grdi3;
+								transition: all 0.3s ease;
+								&:hover {
+									color: white;
+								}
+								&::before {
+									background-image: $grdi3;
+								}
 							}
 						}
 					}
 				}
 			}
-		}
-		.members {
-			$searchbar-sz: 5rem;
+			.members {
+				$searchbar-sz: 5rem;
 
-			display: flex;
-			align-items: center;
-			justify-content: start;
-			flex-direction: column;
-			&.show {
-				.members-recent {
-					.recent-switch {
-						.show-content {
-							display: inline-block;
-						}
-						.hide-content {
-							display: none;
-						}
-					}
-					.recent-list {
-						display: none;
-					}
-				}
-
-				.members-list {
-					max-height: 52rem;
-				}
-			}
-
-			.horizon-bar {
-				position: relative;
-				max-width: 105rem;
-				width: 100%;
-				left: 0;
-				right: 0;
-				height: 0.5rem;
-				background-image: $grdi4;
-			}
-
-			&-search {
-				position: relative;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				width: 100%;
-				height: $searchbar-sz;
-
-				.search {
-					position: absolute;
-					inset: 0;
-					&-input {
-						height: $searchbar-sz;
-						width: calc(100% - #{$searchbar-sz});
-						max-width: 40rem;
-						border-radius: 2rem 0 0 2rem;
-						font-size: 2.2rem;
-						padding: 1rem;
-						&::placeholder {
-							font-style: italic;
-						}
-					}
-					&-btn {
-						cursor: pointer;
-						width: $searchbar-sz;
-						height: $searchbar-sz;
-						background-image: $grdi6;
-						border-radius: 0 2rem 2rem 0;
-					}
-				}
-			}
-			&-recent {
-				margin: 1rem;
-				position: relative;
 				display: flex;
 				align-items: center;
 				justify-content: start;
 				flex-direction: column;
-
-				.recent {
-					&-switch {
-						cursor: pointer;
-						position: relative;
-						margin: auto;
-						background-color: transparent;
-
-						.show-content,
-						.hide-content {
-							font-size: 2rem;
-							padding: 1rem;
-							margin: 1rem;
-							border-radius: 2rem;
-							background-image: $grdi12;
-
-							& > span {
-								color: white;
+				&.show {
+					.members-recent {
+						.recent-switch {
+							.show-content {
+								display: inline-block;
+							}
+							.hide-content {
+								display: none;
 							}
 						}
-						.show-content {
+						.recent-list {
 							display: none;
 						}
-						.hide-content {
-							display: inline-block;
+					}
+
+					.members-list {
+						max-height: 52rem;
+					}
+				}
+
+				.horizon-bar {
+					position: relative;
+					max-width: 105rem;
+					width: 100%;
+					left: 0;
+					right: 0;
+					height: 0.5rem;
+					background-image: $grdi4;
+				}
+
+				&-search {
+					position: relative;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					width: 100%;
+					height: $searchbar-sz;
+
+					.search {
+						position: absolute;
+						inset: 0;
+						&-input {
+							height: $searchbar-sz;
+							width: calc(100% - #{$searchbar-sz});
+							max-width: 40rem;
+							border-radius: 2rem 0 0 2rem;
+							font-size: 2.2rem;
+							padding: 1rem;
+							&::placeholder {
+								font-style: italic;
+							}
+						}
+						&-btn {
+							cursor: pointer;
+							width: $searchbar-sz;
+							height: $searchbar-sz;
+							background-image: $grdi6;
+							border-radius: 0 2rem 2rem 0;
 						}
 					}
-					&-list {
-						display: flex;
-						flex-wrap: wrap;
-						align-items: center;
-						justify-content: center;
+				}
+				&-recent {
+					margin: 1rem;
+					position: relative;
+					display: flex;
+					align-items: center;
+					justify-content: start;
+					flex-direction: column;
 
-						.swiper-container {
+					.recent {
+						&-switch {
+							cursor: pointer;
 							position: relative;
-							width: 85vw;
+							margin: auto;
+							background-color: transparent;
+
+							.show-content,
+							.hide-content {
+								font-size: 2rem;
+								padding: 1rem;
+								margin: 1rem;
+								border-radius: 2rem;
+								background-image: $grdi12;
+
+								& > span {
+									color: white;
+								}
+							}
+							.show-content {
+								display: none;
+							}
+							.hide-content {
+								display: inline-block;
+							}
+						}
+						&-list {
 							display: flex;
+							flex-wrap: wrap;
 							align-items: center;
 							justify-content: center;
-							overflow: hidden;
 
-							.swiper-wrapper {
+							.swiper-container {
 								position: relative;
+								width: 85vw;
 								display: flex;
-								width: 100%;
+								align-items: center;
+								justify-content: center;
+								overflow: hidden;
 
-								.swiper-slide {
+								.swiper-wrapper {
 									position: relative;
-									flex-shrink: 0;
+									display: flex;
+									width: 100%;
 
-									@extend %cardUI;
-									.card {
-										height: 10rem;
+									.swiper-slide {
+										position: relative;
+										flex-shrink: 0;
 
-										.info-container {
-											padding: 0;
-											margin: auto;
+										@extend %cardUI;
+										.card {
+											height: 10rem;
 
-											.name,
-											.desc {
-												padding: 0.7rem;
+											.info-container {
+												padding: 0;
+												margin: auto;
+
+												.name,
+												.desc {
+													padding: 0.7rem;
+												}
 											}
 										}
 									}
@@ -653,146 +683,200 @@ canvas {
 						}
 					}
 				}
-			}
-			&-list {
-				position: relative;
-				width: 100%;
-				max-width: 110rem;
-				max-height: 40rem;
-				padding: 1rem;
-				overflow: hidden auto;
-
-				.list-header {
+				&-list {
 					position: relative;
-					font-weight: 800;
-					font-size: 3rem;
-					padding: 0.4rem;
-					margin: 0.5rem 0 1.5rem;
-					text-align: center;
-					color: transparent;
-					background-clip: text;
-					-webkit-background-clip: text;
-					background-image: $grdi4;
-				}
-				.list-container {
-					position: relative;
-					bottom: 3rem;
-					padding: 2rem 0 5rem;
-					display: flex;
-					flex-wrap: wrap;
-					align-items: center;
-					justify-content: center;
+					width: 100%;
+					max-width: 110rem;
+					max-height: 40rem;
+					padding: 1rem;
+					overflow: hidden auto;
 
-					.swiper-slide {
-						margin: 1rem;
-						width: 25rem;
-						@extend %cardUI;
+					.list-header {
+						position: relative;
+						font-weight: 800;
+						font-size: 3rem;
+						padding: 0.4rem;
+						margin: 0.5rem 0 1.5rem;
+						text-align: center;
+						color: transparent;
+						background-clip: text;
+						-webkit-background-clip: text;
+						background-image: $grdi4;
+					}
+					.list-container {
+						position: relative;
+						bottom: 3rem;
+						padding: 2rem 0 15rem;
+						display: flex;
+						flex-wrap: wrap;
+						align-items: center;
+						justify-content: center;
+
+						.swiper-slide {
+							margin: 1rem;
+							width: 25rem;
+							@extend %cardUI;
+						}
 					}
 				}
 			}
-		}
-		.aio {
-			font-size: 2.3rem;
-			a {
-				color: black;
-			}
-		}
+			.aio {
+				font-size: 2.3rem;
 
-		@include Responsive(SM) {
-			left: $side-bar-width-tab;
-		}
-		@include Responsive(MD) {
-			left: $side-bar-width-pc;
-		}
-	}
-	.contact {
-		position: fixed;
-		bottom: 5rem;
-		right: 5rem;
-		width: 5rem;
-		height: 5rem;
-		border-radius: 50%;
-		background-image: $grdi5;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		transition: all 0.3s ease;
-		&.active,
-		&:hover {
-			&::after {
-				display: block;
-			}
-
-			.contact-panel {
-				display: flex;
-			}
-		}
-		&::after {
-			content: '';
-			position: absolute;
-			width: 15rem;
-			height: 5rem;
-			top: -3rem;
-			display: none;
-			z-index: -1;
-		}
-
-		&-panel {
-			position: absolute;
-			top: -6rem;
-			height: 5rem;
-			display: none;
-			align-items: center;
-			justify-content: center;
-			border-radius: 2rem;
-			transition: all 0.3s ease;
-
-			& > .item {
-				width: 5rem;
-				margin: 1.2rem;
-				border-radius: 50%;
-
-				& > a {
-					display: block;
+				a {
+					color: black;
+				}
+				#timetable {
+					font-family: Arial, Helvetica, sans-serif;
+					border-collapse: collapse;
 					width: 100%;
-					height: 100%;
-					font-size: 4.5rem;
-					color: transparent;
-					background-clip: text;
-					-webkit-background-clip: text;
-					background-image: $grdi1;
+					* {
+						transition: all 0.3s ease;
+					}
+
+					tr {
+						&:nth-child(even) {
+							background-color: #f2f2f2;
+							td:hover {
+								background-color: rgb(151, 182, 250);
+							}
+						}
+
+						th,
+						td {
+							border: 1px solid #ddd;
+							text-align: center;
+							padding: 0.8rem;
+							overflow: hidden;
+							white-space: nowrap;
+							text-overflow: ellipsis;
+						}
+						th {
+							background-color: #2fa775;
+							font-size: 2.8rem;
+							font-weight: 600;
+							padding: 1.2rem;
+							color: white;
+						}
+						td {
+							position: relative;
+							width: calc(1 / 3 * 100%);
+							&,
+							* {
+								font-weight: 400;
+								font-size: 2.5rem;
+							}
+							&:hover {
+								background-color: rgb(255, 202, 219);
+							}
+
+							a {
+								display: inline-block;
+								width: 100%;
+								height: 100%;
+								padding: 0.5rem;
+							}
+						}
+					}
 				}
 			}
-		}
 
-		@include Responsive(SM) {
-		}
-		@include Responsive(MD) {
-		}
-	}
-
-	.blank-container {
-		display: flex;
-		align-items: center;
-		flex-direction: column;
-		justify-content: center;
-		.blank {
-			&-title {
-				color: black;
-				padding: 2rem;
-				font-size: 6rem;
-				text-align: center;
-				margin-bottom: 1rem;
+			@include Responsive($SM) {
+				left: $side-bar-width-tab;
 			}
-			&-btn {
-				cursor: pointer;
-				padding: 2rem;
-				color: white;
-				font-size: 3rem;
-				font-weight: 600;
-				text-align: center;
+			@include Responsive($MD) {
+				left: $side-bar-width-pc;
+			}
+		}
+		.contact {
+			position: fixed;
+			bottom: 5rem;
+			right: 5rem;
+			width: 5rem;
+			height: 5rem;
+			border-radius: 50%;
+			background-image: $grdi5;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: all 0.3s ease;
+			&.active,
+			&:hover {
+				&::after {
+					display: block;
+				}
+
+				.contact-panel {
+					display: flex;
+				}
+			}
+			&::after {
+				content: '';
+				position: absolute;
+				width: 15rem;
+				height: 5rem;
+				top: -3rem;
+				display: none;
+				z-index: -1;
+			}
+
+			&-panel {
+				position: absolute;
+				top: -6rem;
+				height: 5rem;
+				display: none;
+				align-items: center;
+				justify-content: center;
 				border-radius: 2rem;
-				background-image: $grdi15;
+				transition: all 0.3s ease;
+
+				& > .item {
+					width: 5rem;
+					margin: 1.2rem;
+					border-radius: 50%;
+
+					& > a {
+						display: block;
+						width: 100%;
+						height: 100%;
+						font-size: 4.5rem;
+						color: transparent;
+						background-clip: text;
+						-webkit-background-clip: text;
+						background-image: $grdi1;
+					}
+				}
+			}
+
+			@include Responsive($SM) {
+			}
+			@include Responsive($MD) {
+			}
+		}
+
+		.blank-container {
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+			justify-content: center;
+			.blank {
+				&-title {
+					color: black;
+					padding: 2rem;
+					font-size: 6rem;
+					text-align: center;
+					margin-bottom: 1rem;
+				}
+				&-btn {
+					cursor: pointer;
+					padding: 2rem;
+					color: white;
+					font-size: 3rem;
+					font-weight: 600;
+					text-align: center;
+					border-radius: 2rem;
+					background-image: $grdi15;
+				}
 			}
 		}
 	}

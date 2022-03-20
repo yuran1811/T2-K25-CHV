@@ -64,7 +64,94 @@
 		},
 		{ name: 'gallery', content: `` },
 		{ name: 'timetable', content: `` },
-		{ name: 'aio', content: `` },
+		{
+			name: 'aio',
+			content: `
+			<table id="timetable">
+				<thead>
+					<tr>
+						<th>Tự nhiên</th>
+						<th>Xã hội</th>
+						<th>Khác</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<a
+								target="_blank"
+								rel="noopener"
+								href="https://meet.google.com/hzx-chqe-trx?pli=1&amp;authuser=1"> Toán </a>
+						</td>
+						<td>
+							<a
+								target="_blank"
+								rel="noopener"
+								href="https://meet.google.com/gxz-xczh-nfs?pli=1&amp;authuser=1"> Văn </a>
+						</td>
+						<td>
+							<a
+								target="_blank"
+								rel="noopener"
+								href="https://meet.google.com/szi-dssf-hmv?pli=1&amp;authuser=1"> Công nghệ </a>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a
+								target="_blank"
+								rel="noopener"
+								href="https://meet.google.com/ddi-iixf-wip?pli=1&authuser=1"> Lí </a>
+						</td>
+						<td>
+							<a href="#"> Anh </a>
+						</td>
+						<td>
+							<a href="#"> GDQP </a>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a
+								target="_blank"
+								rel="noopener"
+								href="https://zoom.us/j/8157220370?pwd=SW1mSlAzMWZPSWxYa1huQ0hxZ2hsdz09"> Hóa </a>
+						</td>
+						<td>
+							<a href="#"> Sử </a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<a
+								target="_blank"
+								rel="noopener"
+								href="https://zoom.us/j/9634945813?pwd=cWdGZWtXY1BWMXVqcnYwZVphVCtKUT09"> Sinh </a>
+						</td>
+						<td>
+							<a href="#"> Địa </a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<a
+								target="_blank"
+								rel="noopener"
+								href="https://meet.google.com/jzh-nzaw-hzb"> Tin (N) </a>
+						</td>
+						<td>
+							<a
+								target="_blank"
+								rel="noopener"
+								href="https://meet.google.com/yry-gmyd-dya?pli=1&amp;authuser=1"> GDCD </a>
+						</td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>`,
+		},
 	];
 	const contacts = [
 		{
@@ -82,6 +169,14 @@
 	<div class="header">
 		<button class="switch-btn"></button>
 		<div class="header-title">T2 - K25 CHV</div>
+		<a
+			class="admin-page"
+			href="./admin-page.html"
+			target="_blank"
+			rel="noopener"
+		>
+			<span>Admin Page</span>
+		</a>
 	</div>`;
 	const SIDEBAR = `
 	<div class="sidebar">

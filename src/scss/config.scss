@@ -41,21 +41,7 @@ $text-color: black;
 
 // Responsive
 @mixin Responsive($size) {
-	@if $size == XS {
-		@media only screen and (min-width: $XS) {
-			@content;
-		}
-	} @else if $size == SM {
-		@media only screen and (min-width: $SM) {
-			@content;
-		}
-	} @else if $size == MD {
-		@media only screen and (min-width: $MD) {
-			@content;
-		}
-	} @else if $size == XL {
-		@media only screen and (min-width: $XL) {
-			@content;
-		}
+	@media only screen and (min-width: $size) {
+		@content;
 	}
 }
