@@ -17,18 +17,25 @@
 		<title>T2 - Admin</title>
 	</head>
 	<body>
+		<div class="box loading">
+			<div class="plane"></div>
+		</div>
+
 		<div id="app">
 			<form class="log-in-container">
+				<div class="title">Welcome</div>
 				<input
 					type="text"
 					name="name"
 					class="name"
+					autocomplete="off"
 					placeholder="User Name"
 				/>
 				<input
 					type="text"
 					name="pass"
 					class="pass"
+					autocomplete="off"
 					placeholder="Password"
 				/>
 				<div class="err-msg">Check your account info</div>
@@ -63,13 +70,18 @@
 					<h2>Members</h2>
 					<input
 						type="text"
-						class="members-search"
+						class="search-bar members-search"
 						placeholder="Searching"
 					/>
 					<div class="content"></div>
 				</section>
 				<section class="teachers">
 					<h2>Teachers</h2>
+					<input
+						type="text"
+						class="search-bar teachers-search"
+						placeholder="Searching"
+					/>
 					<div class="content"></div>
 				</section>
 				<section class="timetable">

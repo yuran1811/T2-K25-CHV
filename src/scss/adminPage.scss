@@ -20,6 +20,31 @@
 	}
 }
 
+.box {
+	position: fixed;
+	inset: 0;
+	perspective: 350px;
+	z-index: -1;
+	background-color: rgba(0, 0, 0, 0.75);
+	transition: all 0.3s ease;
+	opacity: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	&.active {
+		opacity: 1;
+		z-index: 100;
+	}
+
+	.plane {
+		width: 8rem;
+		height: 8rem;
+		transform: rotate(0);
+		background-color: #fc2f70;
+		animation: flip 0.6s infinite;
+	}
+}
+
 #app {
 	height: 100vh;
 	display: flex;
@@ -46,18 +71,40 @@
 		align-items: center;
 		flex-direction: column;
 		justify-content: center;
-		z-index: 100;
-		background-color: rgba(0, 0, 0, 0.7);
+		background: $grdi17;
+		z-index: 10;
 
 		* {
 			font-size: 2rem;
 		}
-		input {
+		.title {
+			position: relative;
+			font-weight: 600;
+			font-size: 5rem;
+			color: white;
 			margin: 1rem;
-			padding: 1rem;
-			max-width: 30rem;
+			&::after {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				height: 0.5rem;
+				width: 80%;
+				left: 50%;
+				transform: translateX(-50%);
+				background-color: white;
+			}
+		}
+		input {
+			padding: 1rem 2rem;
+			margin: 1rem;
+			width: 85%;
+			max-width: 20rem;
 			max-height: 10rem;
+			border: none;
+			outline: none;
+			font-weight: 500;
 			border-radius: 4rem;
+			text-align: center;
 		}
 		button {
 			margin: 1rem;
@@ -65,6 +112,12 @@
 			height: 5rem;
 			padding: 1rem;
 			border-radius: 4rem;
+			background: $grdi1;
+			font-weight: 600;
+			color: white;
+			span {
+				font-weight: 500;
+			}
 		}
 		.err-msg {
 			padding: 1rem;
@@ -173,7 +226,7 @@
 					font-style: italic;
 				}
 
-				&.members-search {
+				&.search-bar {
 					margin-top: 1.5rem;
 					position: relative;
 					left: 50%;
@@ -186,7 +239,7 @@
 
 			.content {
 				padding: 1rem;
-				.member-item {
+				&-item {
 					border: 5px solid transparent;
 					border-radius: 3rem;
 					padding: 2rem 0;
@@ -195,7 +248,7 @@
 					&.active {
 						border-color: lightcoral;
 					}
-					& + .member-item {
+					& + &-item {
 						margin-top: 5rem;
 					}
 
@@ -240,5 +293,14 @@
 				}
 			}
 		}
+	}
+}
+
+@keyframes flip {
+	50% {
+		transform: rotateY(180deg);
+	}
+	100% {
+		transform: rotateY(180deg) rotateX(180deg);
 	}
 }

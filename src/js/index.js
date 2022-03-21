@@ -46,14 +46,16 @@ const resetUI = () => {
 };
 
 const getHTMLS = (list, type = 0) =>
-	list.map((item) => {
-		const { name, vi_name, desc, photo, email, facebook } = item;
-		const infoHTML = `
+	list
+		.sort((a, b) => a.id - b.id)
+		.map((item) => {
+			const { name, vi_name, desc, photo, email, facebook } = item;
+			const infoHTML = `
 			<div class="info-container">
 				<div class="name">${vi_name}</div>
 				${!type && desc ? `<div class="desc">${desc}</div>` : ''}
 			</div>`;
-		const socialHTML = `
+			const socialHTML = `
 			<div class="social-container">
 				<ul class="social">
 					<li>
@@ -68,7 +70,7 @@ const getHTMLS = (list, type = 0) =>
 					</li>
 				</ul>
 			</div>`;
-		const htmls = `
+			const htmls = `
 			<div class="swiper-slide">
 				<div class="card" data-memberid="${item.id}">
 					<div
@@ -79,8 +81,8 @@ const getHTMLS = (list, type = 0) =>
 					${!type ? socialHTML : ''}
 				</div>
 			</div>`;
-		return htmls;
-	});
+			return htmls;
+		});
 const renderMembers = () => {
 	memberListContainer.innerHTML = getHTMLS(members).join('');
 	swiperWrapper.innerHTML += getHTMLS(members.slice(0, 5), 1).join('');

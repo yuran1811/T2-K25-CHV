@@ -14,17 +14,23 @@ const thisUser = {
 
 const app = $('#app');
 const navBar = $('#app > nav');
-const membersSection = $('section.members .content');
-const searchMembers = $('.members-search');
+const loading = $('.loading');
+const searchBar = $$('.search-bar');
+const contents = $$('section .content');
 
-const getContent = (list) =>
+const getContent = (list, type) =>
 	list.map((item) => {
 		const { name, _id, vi_name, desc, photo, email, facebook } = item;
 		return `
-		<div class="member-item">
-			<form class="member-data" data-memberId="${_id}" method="POST">
+		<div class="content-item ${type}-item">
+			<form class="${type}-data" data-${type}id="${_id}" data-type="${type}" method="POST">
 				<input type="text" name="name" value="${name}" placeholder="No name"/>
 				<input type="text" name="vi_name" value="${vi_name}" placeholder="No vi_name"/>
+				${
+					item?.subject
+						? `<input type="text" name="subject" value="${item?.subject}" placeholder="No subject"/>`
+						: ''
+				}
 				<input type="text" name="desc" value="${desc}" placeholder="No desc"/>
 				<input type="text" name="photo" value="${photo}" placeholder="No photo"/>
 				<input type="text" name="email" value="${email}" placeholder="No email"/>
@@ -33,35 +39,37 @@ const getContent = (list) =>
 			</form>
 		</div>`;
 	});
-const renderMembers = (list) => {
-	membersSection.innerHTML = getContent(list).join('');
+const render = (section, list, type) => {
+	section.innerHTML = getContent(list, type).join('');
 };
-const searchMembersHandle = (e) => (list) => {
-	const value = e.target.value.trim().toLowerCase();
+const searchBarHandle = (e) => (section, list, type) => {
+	const value = e.currentTarget.value.trim().toLowerCase();
 	if (!value) {
-		membersSection.innerHTML = '';
+		section.innerHTML = '';
 		return;
 	}
 
 	if (['*', '.'].includes(value)) {
-		membersSection.innerHTML = getContent(members).join('');
+		section.innerHTML = getContent(list, type).join('');
 		return;
 	}
 
 	const newList = list.filter(
 		(item) =>
-			item.id == value ||
-			item.class.toLowerCase() === value ||
-			item.name.toLowerCase().includes(value) ||
+			item?.id == value ||
+			item?.class?.toLowerCase() === value ||
+			item?.subject?.toLowerCase() === value ||
+			item?.name?.toLowerCase()?.includes(value) ||
 			item?.vi_name?.toLowerCase()?.includes(value)
 	);
-	membersSection.innerHTML = getContent(newList).join('');
-	membersSection.scroll(0, 0);
+	section.innerHTML = getContent(newList, type).join('');
+	section.scroll(0, 0);
 };
 const formSubmit = async (e) => {
-	const memberItem = e.target.closest('.member-item');
-	const formEle = memberItem.querySelector('form');
-	const memberID = formEle.dataset.memberid;
+	const contentItem = e.target.closest('.content-item');
+	const formEle = contentItem.querySelector('form');
+	const type = formEle.dataset.type;
+	const typeID = formEle.dataset[`${type}id`];
 	const { name, pass } = thisUser;
 	formEle.onsubmit = async (f) => {
 		f.preventDefault();
@@ -73,7 +81,7 @@ const formSubmit = async (e) => {
 			data[attr] = item.value.trim();
 		});
 		const res = await fetch(
-			`${API}/api/members/edit/${memberID}/${name}/${pass}?_method=PUT`,
+			`${API}/api/${type}/edit/${typeID}/${name}/${pass}?_method=PUT`,
 			{
 				method: 'POST',
 				headers: {
@@ -112,8 +120,13 @@ logInForm.onsubmit = async (e) => {
 	e.preventDefault();
 	const name = e.target.querySelector('.name').value.trim();
 	const pass = e.target.querySelector('.pass').value.trim();
+
+	if (!name || !pass) return;
+
+	loading.classList.add('active');
 	const res = await fetch(`${API}/api/users/auth/${name}/${pass}`);
 	const { auth, id } = await res.json();
+	loading.classList.remove('active');
 
 	let lastWrong;
 	if (!auth) {
@@ -121,7 +134,7 @@ logInForm.onsubmit = async (e) => {
 		lastWrong && clearTimeout(lastWrong);
 		lastWrong = setTimeout(() => {
 			errMsg.classList.remove('isErr');
-		}, 5000);
+		}, 3000);
 		thisUser.name = '';
 		thisUser.pass = '';
 	} else {
@@ -152,18 +165,18 @@ tools.forEach((item, index) => {
 });
 
 // Fetch Data
-let members;
-let teachers;
 (async () => {
+	const dataList = ['members', 'teachers'];
 	const fetchData = await Promise.allSettled([
-		fetch(`${API}/api/teachers/list`),
 		fetch(`${API}/api/members/list`),
+		fetch(`${API}/api/teachers/list`),
 	]);
-	const data = fetchData
+	fetchData
 		.filter((data) => data.status === 'fulfilled')
-		.map((item) => item.value.json());
-	const [teachersData, membersData] = data;
-	teachers = await teachersData;
-	members = await membersData;
-	searchMembers.oninput = (e) => searchMembersHandle(e)(members);
-})(members, teachers);
+		.map((item) => item.value.json())
+		.forEach(async (item, idx) => {
+			item = await item;
+			searchBar[idx].oninput = (e) =>
+				searchBarHandle(e)(contents[idx], item, dataList[idx]);
+		});
+})();
