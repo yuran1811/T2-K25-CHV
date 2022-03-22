@@ -5,6 +5,9 @@ const $$ = document.querySelectorAll.bind(document);
 const select = (par, child) => par.querySelector(child);
 const selectAll = (par, child) => par.querySelectorAll(child);
 
+const defaultConfig = {
+	ava: './src/img/ava1.jpg',
+};
 const icons = {
 	fbIco: '<i class="bi bi-facebook"></i>',
 	mailIco: '<i class="bi bi-envelope"></i>',
@@ -12,29 +15,31 @@ const icons = {
 const { fbIco, mailIco } = icons;
 const API_LINK = 'https://t2k25chvapi.herokuapp.com';
 const API_TEST = 'http://localhost:1811';
+const API = API_LINK;
 
 const app = $('#app');
 const loadingItem = $('.loading');
-
 const sidebarItems = $$('.sidebar .item');
 const homeContentItems = $$('.home .item');
 const contentSections = $$('.content .section');
-
 const memberList = $('.members-list');
 const memberListContainer = $('.members-list .list-container');
-const searchMembers = $('.members-search .search-input');
+const searchContainer = $('.members-search');
+const searchInp = $('.members-search .search-input');
+const searchBtn = $('.members-search .search-btn');
 const swiperWrapper = $('.members-recent .recent-list .swiper-wrapper');
 
 let members, teachers;
 
 const hideList = (list) => list.forEach((item) => item.classList.add('hide'));
+const getSearchMode = () => searchContainer.className.includes('teachers');
 const addBlankInfo = (list) => {
 	list.forEach((item) => {
 		if (item.innerHTML) return;
 		item.innerHTML = `
 		<div class="blank-container">
 			<div class="blank-title">No Info</div>
-			<button class="blank-btn">Return Home</button>
+			<button class="blank-btn" onclick="resetUI">Return Home</button>
 		</div>`;
 	});
 	$$('.blank-btn').forEach((item) => (item.onclick = resetUI));
@@ -44,7 +49,6 @@ const resetUI = () => {
 	contentSections[0].classList.remove('hide');
 	loadingItem.classList.add('hide');
 };
-
 const getHTMLS = (list, type = 0) =>
 	list
 		.sort((a, b) => a.id - b.id)
@@ -112,31 +116,61 @@ const renderMembers = () => {
 		},
 	});
 };
-
-const searchMembersHandle = (e) => (list) => {
-	const value = e.target.value.trim().toLowerCase();
+const renderTeachers = () => {
+	memberListContainer.innerHTML = getHTMLS(teachers).join('');
+	swiperWrapper.innerHTML += getHTMLS(teachers.slice(0, 5), 1).join('');
+	new Swiper('.members-recent .recent-list .swiper-container', {
+		direction: 'horizontal',
+		centeredSlides: false,
+		slidesPerView: 4,
+		spaceBetween: 30,
+		threshold: 4,
+		speed: 700,
+		breakpoints: {
+			950: {
+				centeredSlides: false,
+				slidesPerView: 3,
+				spaceBetween: 25,
+			},
+			780: {
+				centeredSlides: false,
+				slidesPerView: 2,
+				spaceBetween: 25,
+			},
+			420: {
+				centeredSlides: true,
+				slidesPerView: 1,
+				spaceBetween: 10,
+			},
+		},
+	});
+};
+const searchBarHandle = (e) => (section, list, type) => {
+	const value = e.currentTarget.value.trim().toLowerCase();
 	if (!value) {
-		memberListContainer.innerHTML = getHTMLS(list).join('');
+		section.innerHTML = '';
+		return;
+	}
+
+	if (['*', '.'].includes(value)) {
+		section.innerHTML = getHTMLS(list, type === 'teachers').join('');
 		return;
 	}
 
 	const newList = list.filter(
 		(item) =>
-			item.id == value ||
-			item.class.toLowerCase() === value ||
-			item.name.toLowerCase().includes(value) ||
+			item?.index == value ||
+			item?._class?.toLowerCase() === value ||
+			item?.subject?.toLowerCase() === value ||
+			item?.name?.toLowerCase()?.includes(value) ||
 			item?.vi_name?.toLowerCase()?.includes(value)
 	);
-	memberListContainer.innerHTML = getHTMLS(newList).join('');
-
-	memberList.scroll(0, 0);
+	section.innerHTML = getHTMLS(newList, type === 'teachers').join('');
+	section.scroll(0, 0);
 };
 
+// Init App
 (() => {
-	// Auth
-	const lastAuth = JSON.parse(sessionStorage.getItem('authAt'));
-	document.body.classList.toggle('isAuth', lastAuth);
-
 	// Menu Switch
 	const switchBtn = $('.header .switch-btn');
 	switchBtn.onclick = (e) => {
@@ -191,18 +225,29 @@ const searchMembersHandle = (e) => (list) => {
 // Members Section Handles
 (async () => {
 	const fetchData = await Promise.allSettled([
-		fetch(`${API_LINK}/api/teachers/list`),
-		fetch(`${API_LINK}/api/members/list`),
+		fetch(`${API}/api/teachers/list`),
+		fetch(`${API}/api/members/list`),
 	]);
 	const data = fetchData.map((data, idx) => {
 		if (data.status === 'fulfilled') return data.value.json();
-		return localData[idx];
+		// return localData[idx];
 	});
 	const [teachersData, membersData] = data;
 	teachers = await teachersData;
 	members = await membersData;
 
-	searchMembers.oninput = (e) => searchMembersHandle(e)(members);
+	searchBtn.onclick = () => {
+		searchContainer.classList.toggle('teachers');
+		if (getSearchMode())
+			searchInp.oninput = (e) => {
+				const searchMode = getSearchMode();
+				searchBarHandle(e)(
+					memberListContainer,
+					searchMode ? teachers : members,
+					searchMode ? 'teachers' : 'members'
+				);
+			};
+	};
 	renderMembers();
 	resetUI();
 })(members, teachers);

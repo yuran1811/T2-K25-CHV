@@ -1,11 +1,6 @@
 @import 'config';
 @import 'reset';
 
-/* 
-@include Responsive($SM) {}
-@include Responsive($MD) {}
-*/
-
 %cardUI {
 	.card {
 		position: relative;
@@ -115,15 +110,28 @@
 
 body {
 	.loading {
+		background-color: black;
 		position: fixed;
 		inset: 0;
-		background-color: black;
 		opacity: 1;
 		z-index: 10;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		transition: all 0.3s ease;
 		&.hide {
 			opacity: 0;
 			z-index: -10;
+		}
+
+		.circle {
+			width: 5rem;
+			height: 5.5rem;
+			border: 3px solid transparent;
+			border-top-color: #fc2f70;
+			border-bottom-color: #fc2f70;
+			border-radius: 50%;
+			animation: spin-stretch 1.2s ease-in-out infinite;
 		}
 	}
 
@@ -879,5 +887,16 @@ body {
 				}
 			}
 		}
+	}
+}
+
+@keyframes spin-stretch {
+	50% {
+		transform: rotate(360deg) scale(0.4, 0.33);
+		border-width: 8px;
+	}
+	100% {
+		transform: rotate(720deg) scale(1, 1);
+		border-width: 3px;
 	}
 }

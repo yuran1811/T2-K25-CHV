@@ -20,80 +20,8 @@
 		<div class="box loading">
 			<div class="plane"></div>
 		</div>
-
-		<div id="app">
-			<form class="log-in-container">
-				<div class="title">Welcome</div>
-				<input
-					type="text"
-					name="name"
-					class="name"
-					autocomplete="off"
-					placeholder="User Name"
-				/>
-				<input
-					type="text"
-					name="pass"
-					class="pass"
-					autocomplete="off"
-					placeholder="Password"
-				/>
-				<div class="err-msg">Check your account info</div>
-				<button type="submit">
-					<span> Log In </span>
-				</button>
-			</form>
-
-			<nav class="tool">
-				<div class="user">
-					<div class="ava"></div>
-					<div class="name">User</div>
-				</div>
-				<ul>
-					<li class="tool-item">
-						<span> Members </span>
-					</li>
-					<li class="tool-item">
-						<span> Teachers </span>
-					</li>
-					<li class="tool-item">
-						<span> Timetable </span>
-					</li>
-					<li class="tool-item">
-						<span> AIO </span>
-					</li>
-				</ul>
-			</nav>
-
-			<div class="main">
-				<section class="members">
-					<h2>Members</h2>
-					<input
-						type="text"
-						class="search-bar members-search"
-						placeholder="Searching"
-					/>
-					<div class="content"></div>
-				</section>
-				<section class="teachers">
-					<h2>Teachers</h2>
-					<input
-						type="text"
-						class="search-bar teachers-search"
-						placeholder="Searching"
-					/>
-					<div class="content"></div>
-				</section>
-				<section class="timetable">
-					<h2>Timetable</h2>
-					<div class="content"></div>
-				</section>
-				<section class="aio">
-					<h2>AIO</h2>
-					<div class="content"></div>
-				</section>
-			</div>
-		</div>
+		<div id="app"></div>
+		<script src="./src/js/renderAdmin.js"></script>
 		<script src="./src/js/admin.js"></script>
 	</body>
 </html>

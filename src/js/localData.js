@@ -1,15 +1,4 @@
-const teachersLocal = [
-	{
-		name: 'To Thi Hong',
-		vi_name: 'Tô Thị Hồng',
-		class: 'GVCN',
-	},
-	{
-		name: 'Nguyen Van Cuong',
-		vi_name: 'Nguyễn Văn Cường',
-		class: 'GVCN',
-	},
-];
+const teachersLocal = [];
 const membersLocal = [
 	{
 		id: 1,
