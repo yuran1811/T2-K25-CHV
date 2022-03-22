@@ -47,6 +47,23 @@ const updateData = async (type) => {
 const getContent = (list, type) =>
 	list.map((item) => {
 		const { name, _id, vi_name, desc, photo, email, facebook } = item;
+		if (type === 'aio')
+			return `
+			<div class="content-item ${type}-item">
+				<form class="${type}-data" data-${type}id="${_id}" data-type="${type}" method="POST">
+					<input ${inputRule} type="text" name="name" value="${item.name}" placeholder="No subject"/>
+					<input ${inputRule} type="text" name="link" value="${item.link}" placeholder="No link url"/>
+					<button type="submit" class="edit" onclick="formEdit(event)">
+						<div class="submit-ico">
+							<i class="bi bi-pen edit-ico"></i>
+							<i class="bi bi-arrow-repeat sync-ico spin"></i>
+							<i class="bi bi-check2 success-ico"></i>
+							<i class="bi bi-x-lg fail-ico"></i>
+						</div>
+						<span class="submit-text"> Edit </span>
+					</button>
+				</form>
+			</div>`;
 		return `
 		<div class="content-item ${type}-item">
 			<form class="${type}-data" data-${type}id="${_id}" data-type="${type}" method="POST">
@@ -76,6 +93,25 @@ const getContent = (list, type) =>
 const getAddSection = (type) => {
 	const addForm = document.createElement('div');
 	addForm.className = `content-item ${type}-item add-form`;
+
+	if (type === 'aio') {
+		addForm.innerHTML = `
+		<form class="${type}-data" data-type="${type}" method="POST">
+			<input ${inputRule} type="text" name="name" placeholder="Subject, required"/>
+			<input ${inputRule} type="text" name="link" placeholder="Link URL, required"/>
+			<button type="submit" class="edit" onclick="formAdd(event)">
+				<div class="submit-ico">
+					<i class="bi bi-pen edit-ico"></i>
+					<i class="bi bi-arrow-repeat sync-ico spin"></i>
+					<i class="bi bi-check2 success-ico"></i>
+					<i class="bi bi-x-lg fail-ico"></i>
+				</div>
+				<span class="submit-text"> Add </span>
+			</button>
+		</form>`;
+		return addForm;
+	}
+
 	addForm.innerHTML = `
 	<form class="${type}-data" data-type="${type}" method="POST">
 		${
@@ -401,16 +437,18 @@ addBtns.forEach((item) => {
 
 // Fetch Data
 (async () => {
-	const dataList = ['members', 'teachers'];
+	const dataList = ['members', 'teachers', 'aio'];
 	const fetchData = await Promise.allSettled([
 		fetch(`${API}/api/members/list`),
 		fetch(`${API}/api/teachers/list`),
+		fetch(`${API}/api/aio/list`),
 	]);
 	fetchData
 		.filter((data) => data.status === 'fulfilled')
 		.map((item) => item.value.json())
 		.forEach(async (item, idx) => {
 			data[dataList[idx]] = await item;
+			data[dataList[idx]].sort((a, b) => a.name > b.name);
 			searchBar[idx].oninput = (e) =>
 				searchBarHandle(e)(
 					contents[idx + 1],

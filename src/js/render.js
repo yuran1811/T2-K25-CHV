@@ -4,8 +4,8 @@
 		'About',
 		'Members',
 		'Gallery',
-		'Timetable',
 		'AIO',
+		'Timetable',
 	];
 	const contents = [
 		{
@@ -63,7 +63,6 @@
 			</div>`,
 		},
 		{ name: 'gallery', content: `` },
-		{ name: 'timetable', content: `` },
 		{
 			name: 'aio',
 			content: `
@@ -152,6 +151,7 @@
 				</tbody>
 			</table>`,
 		},
+		{ name: 'timetable', content: `` },
 	];
 	const contacts = [
 		{

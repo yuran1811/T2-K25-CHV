@@ -89,7 +89,7 @@ const getHTMLS = (list, type = 0) =>
 		});
 const renderMembers = () => {
 	memberListContainer.innerHTML = getHTMLS(members).join('');
-	swiperWrapper.innerHTML += getHTMLS(members.slice(0, 5), 1).join('');
+	// swiperWrapper.innerHTML += getHTMLS(members.slice(0, 5), 1).join('');
 	new Swiper('.members-recent .recent-list .swiper-container', {
 		direction: 'horizontal',
 		centeredSlides: false,
@@ -118,7 +118,7 @@ const renderMembers = () => {
 };
 const renderTeachers = () => {
 	memberListContainer.innerHTML = getHTMLS(teachers).join('');
-	swiperWrapper.innerHTML += getHTMLS(teachers.slice(0, 5), 1).join('');
+	// swiperWrapper.innerHTML += getHTMLS(teachers.slice(0, 5), 1).join('');
 	new Swiper('.members-recent .recent-list .swiper-container', {
 		direction: 'horizontal',
 		centeredSlides: false,
@@ -236,9 +236,17 @@ const searchBarHandle = (e) => (section, list, type) => {
 	teachers = await teachersData;
 	members = await membersData;
 
+	members.sort((a, b) => a.index - b.index);
+	teachers.sort((a, b) => a.index - b.index);
+
+	searchInp.oninput = (e) => {
+		searchBarHandle(e)(memberListContainer, members, 'members');
+	};
+
 	searchBtn.onclick = () => {
 		searchContainer.classList.toggle('teachers');
-		if (getSearchMode())
+		if (getSearchMode()) {
+			memberListContainer.innerHTML = '';
 			searchInp.oninput = (e) => {
 				const searchMode = getSearchMode();
 				searchBarHandle(e)(
@@ -247,6 +255,7 @@ const searchBarHandle = (e) => (section, list, type) => {
 					searchMode ? 'teachers' : 'members'
 				);
 			};
+		}
 	};
 	renderMembers();
 	resetUI();

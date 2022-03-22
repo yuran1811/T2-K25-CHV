@@ -42,23 +42,31 @@
 			icon: '<i class="bi bi-mortarboard"></i>',
 			extra: `
 			<input type="text" class="search-bar members-search" placeholder="Searching" />
-			<div class="add-btn members"><i class="bi bi-person-plus"></i></div>`,
+			<div class="add-btn members">
+				<i class="bi bi-person-plus"></i>
+			</div>`,
 		},
 		{
 			name: 'Teachers',
 			icon: '<i class="bi bi-person"></i>',
 			extra: `
 			<input type="text" class="search-bar teachers-search" placeholder="Searching" />
-			<div class="add-btn teachers"><i class="bi bi-person-plus"></i></div>`,
-		},
-		{
-			name: 'Timetable',
-			icon: '<i class="bi bi-calendar3"></i>',
-			extra: ``,
+			<div class="add-btn teachers">
+				<i class="bi bi-person-plus"></i>
+			</div>`,
 		},
 		{
 			name: 'AIO',
 			icon: '<i class="bi bi-columns-gap"></i>',
+			extra: `
+			<input type="text" class="search-bar aio-search" placeholder="Searching" />
+			<div class="add-btn aio">
+				<i class="bi bi-plus-circle"></i>
+			</div>`,
+		},
+		{
+			name: 'Timetable',
+			icon: '<i class="bi bi-calendar3"></i>',
 			extra: ``,
 		},
 	];

@@ -15,7 +15,7 @@
 		justify-content: center;
 		&:hover {
 			.card-img {
-				filter: blur(0.2rem);
+				filter: blur(0.24rem);
 				transform: scale(1.2);
 			}
 			.info-container {
@@ -590,6 +590,13 @@ body {
 					justify-content: center;
 					width: 100%;
 					height: $searchbar-sz;
+					&.teachers {
+						.search {
+							&-btn {
+								background-image: $grdi5;
+							}
+						}
+					}
 
 					.search {
 						position: absolute;
