@@ -31,6 +31,8 @@ const sections = $$('section');
 const searchBar = $$('.search-bar');
 const contents = $$('section .content');
 const logInForm = $('.log-in-container');
+const logInPassInp = $('.log-in-container input[name="pass"]');
+const logInPassMode = $('.pass-mode');
 const userField = $('.user');
 const userContent = contents[0];
 const userNameInp = userContent.querySelector('input[name="name"]');
@@ -40,6 +42,8 @@ const userAvaEle = userField.querySelector('.ava');
 const userNameEle = userField.querySelector('.name');
 
 const hideList = (list) => list.forEach((item) => item.classList.add('hide'));
+const encode = (source) => {};
+const decode = (pattern) => {};
 const updateData = async (type) => {
 	const resp = await fetch(`${API}/api/${type}/list`);
 	data[type] = await resp.json();
@@ -53,6 +57,7 @@ const getContent = (list, type) =>
 				<form class="${type}-data" data-${type}id="${_id}" data-type="${type}" method="POST">
 					<input ${inputRule} type="text" name="name" value="${item.name}" placeholder="No subject"/>
 					<input ${inputRule} type="text" name="link" value="${item.link}" placeholder="No link url"/>
+					<input ${inputRule} type="text" name="color" value="${item.color}" placeholder="No color"/>
 					<button type="submit" class="edit" onclick="formEdit(event)">
 						<div class="submit-ico">
 							<i class="bi bi-pen edit-ico"></i>
@@ -99,6 +104,7 @@ const getAddSection = (type) => {
 		<form class="${type}-data" data-type="${type}" method="POST">
 			<input ${inputRule} type="text" name="name" placeholder="Subject, required"/>
 			<input ${inputRule} type="text" name="link" placeholder="Link URL, required"/>
+			<input ${inputRule} type="text" name="color" placeholder="Color"/>
 			<button type="submit" class="edit" onclick="formAdd(event)">
 				<div class="submit-ico">
 					<i class="bi bi-pen edit-ico"></i>
@@ -412,6 +418,11 @@ userPassInp.value = thisUser.pass;
 
 // Log In Auth Handle
 logInForm.onsubmit = logInHandle;
+logInPassMode.onclick = function () {
+	this.classList.toggle('show');
+	const isShow = this.className.includes('show');
+	logInPassInp.type = isShow ? 'text' : 'password';
+};
 
 // Tool Items Handles
 tools.forEach((item, index) => {

@@ -1,11 +1,11 @@
 (() => {
 	const sidebars = [
-		'Home',
-		'About',
-		'Members',
-		'Gallery',
-		'AIO',
-		'Timetable',
+		{ name: 'Home', icon: '<i class="bi bi-house"></i>' },
+		{ name: 'About', icon: '<i class="bi bi-stack"></i>' },
+		{ name: 'Members', icon: '<i class="bi bi-people"></i>' },
+		{ name: 'Gallery', icon: '<i class="bi bi-collection"></i>' },
+		{ name: 'AIO', icon: '<i class="bi bi-link-45deg"></i>' },
+		{ name: 'Timetable', icon: '<i class="bi bi-calendar3"></i>' },
 	];
 	const contents = [
 		{
@@ -16,9 +16,9 @@
 					.slice(2)
 					.map(
 						(item) => `
-						<li class="item" data-sectionid="${item.toLowerCase()}">
+						<li class="item" data-sectionid="${item.name.toLowerCase()}">
 							<button><span>Go</span></button>
-							<span class="label">${item}</span>
+							<span class="label">${item.name}</span>
 						</li>`
 					)
 					.join('')}
@@ -65,6 +65,16 @@
 		{ name: 'gallery', content: `` },
 		{
 			name: 'aio',
+			content: `
+			<div class="aio-search">
+				<input class="search-input" type="text" placeholder="Type subject name"/>
+			</div>
+			<div class="aio-list">
+				<div class="list-container"></div>
+			</div>`,
+		},
+		{
+			name: 'timetable',
 			content: `
 			<table id="timetable">
 				<thead>
@@ -151,7 +161,6 @@
 				</tbody>
 			</table>`,
 		},
-		{ name: 'timetable', content: `` },
 	];
 	const contacts = [
 		{
@@ -175,7 +184,7 @@
 			target="_blank"
 			rel="noopener"
 		>
-			<span>Admin Page</span>
+			<span>Admin</span>
 		</a>
 	</div>`;
 	const SIDEBAR = `
@@ -184,7 +193,10 @@
 		${sidebars
 			.map(
 				(item) =>
-					`<li class="item"><span class="label">${item}</span></li>`
+					`<li class="item">
+						${item.icon}
+						<span class="label">${item.name}</span>
+					</li>`
 			)
 			.join('')}
 		</ul>

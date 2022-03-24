@@ -292,7 +292,7 @@ body {
 				}
 
 				& > li {
-					padding: 3rem 0;
+					padding: 1rem;
 					margin: 1rem 0;
 					width: 90%;
 					opacity: 1;
@@ -303,7 +303,14 @@ body {
 					transform: translateX(0);
 					transition: all 0.3s ease;
 					cursor: pointer;
+					display: flex;
+					align-items: center;
+					flex-direction: column;
 
+					i {
+						font-size: 2.3rem;
+						margin: 0.5rem;
+					}
 					& > span {
 						font-weight: 500;
 						width: 100%;
@@ -735,7 +742,7 @@ body {
 					}
 				}
 			}
-			.aio {
+			.timetable {
 				font-size: 2.3rem;
 
 				a {
@@ -791,6 +798,46 @@ body {
 								height: 100%;
 								padding: 0.5rem;
 							}
+						}
+					}
+				}
+			}
+			.aio {
+				margin: 2rem;
+				&-search {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					.search-input {
+						padding: 1rem 1.5rem;
+						border-radius: 3rem;
+						font-size: 2.4rem;
+						max-width: 32rem;
+					}
+				}
+				&-list {
+					margin-top: 3rem;
+					.list-container {
+						position: relative;
+						display: flex;
+						flex-flow: column wrap;
+						align-items: center;
+						justify-content: center;
+						a {
+							// background: var(--link-bg);
+							border-radius: 1.5rem;
+							position: relative;
+							color: white;
+							display: block;
+							min-width: 10rem;
+							padding: 1rem;
+							margin: 1rem;
+							text-align: center;
+							font-weight: 600;
+						}
+
+						@include Responsive($SM) {
+							flex-flow: row wrap;
 						}
 					}
 				}

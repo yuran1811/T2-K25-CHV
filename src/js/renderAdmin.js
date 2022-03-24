@@ -6,7 +6,20 @@
 	<form class="log-in-container">
 		<div class="title">Welcome</div>
 		<input ${inputRule} type="text" name="name" class="name" autocomplete="off" placeholder="User Name" />
-		<input ${inputRule} type="text" name="pass" class="pass" autocomplete="off" placeholder="Password" />
+		<div class="pass-container">
+			<input
+				${inputRule}
+				type="password"
+				name="pass"
+				class="pass"
+				id="pass"
+				autocomplete="off"
+				placeholder="Password" />
+			<label for="pass" class="pass-mode">
+				<i class="bi bi-eye show"></i>
+				<i class="bi bi-eye-slash hide"></i>
+			</label>
+		</div>
 		<div class="err-msg">Check your account info</div>
 		<button type="submit">
 			<span> Log In </span>

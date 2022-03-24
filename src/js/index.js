@@ -22,24 +22,42 @@ const loadingItem = $('.loading');
 const sidebarItems = $$('.sidebar .item');
 const homeContentItems = $$('.home .item');
 const contentSections = $$('.content .section');
+
+const aioListContainer = $('.aio-list .list-container');
+const aioSearchInp = $('.aio-search input');
+
 const memberList = $('.members-list');
 const memberListContainer = $('.members-list .list-container');
-const searchContainer = $('.members-search');
-const searchInp = $('.members-search .search-input');
-const searchBtn = $('.members-search .search-btn');
+const memberSearchContainer = $('.members-search');
+const memberSearchBtn = memberSearchContainer.querySelector('.search-btn');
+const memberSearchInp = memberSearchContainer.querySelector('.search-input');
 const swiperWrapper = $('.members-recent .recent-list .swiper-wrapper');
 
-let members, teachers;
+let members, teachers, aio;
 
+const render = {
+	members: () => {
+		memberListContainer.innerHTML = getHTMLS(members).join('');
+	},
+	teachers: () => {
+		memberListContainer.innerHTML = getHTMLS(teachers, 'teachers').join('');
+	},
+	aio: () => {
+		aioListContainer.innerHTML = getHTMLS(aio, 'aio').join('');
+	},
+};
 const hideList = (list) => list.forEach((item) => item.classList.add('hide'));
-const getSearchMode = () => searchContainer.className.includes('teachers');
+const getSearchMode = (type) => memberSearchContainer.className.includes(type);
 const addBlankInfo = (list) => {
 	list.forEach((item) => {
 		if (item.innerHTML) return;
 		item.innerHTML = `
 		<div class="blank-container">
 			<div class="blank-title">No Info</div>
-			<button class="blank-btn" onclick="resetUI">Return Home</button>
+			<button class="blank-btn" onclick="resetUI">
+				<i class="bi bi-house"></i>
+				<span>Return Home</span>
+			</button>
 		</div>`;
 	});
 	$$('.blank-btn').forEach((item) => (item.onclick = resetUI));
@@ -49,29 +67,42 @@ const resetUI = () => {
 	contentSections[0].classList.remove('hide');
 	loadingItem.classList.add('hide');
 };
-const getHTMLS = (list, type = 0) =>
+const getHTMLS = (list, type = 'members') =>
 	list
 		.sort((a, b) => a.id - b.id)
 		.map((item) => {
-			const { name, vi_name, desc, photo, email, facebook } = item;
+			if (type === 'aio') {
+				const aioLink = `
+				<a
+					style="background: ${item.color};"
+					class="link-name"
+					target="_blank"
+					rel="noopener"
+					href="${item.link}">
+					${item.name}
+				</a>`;
+				return aioLink;
+			}
+
+			const { name, subject, vi_name, desc, photo, email, facebook } =
+				item;
 			const infoHTML = `
 			<div class="info-container">
 				<div class="name">${vi_name}</div>
-				${!type && desc ? `<div class="desc">${desc}</div>` : ''}
+				${type === 'members' && desc ? `<div class="desc">${desc}</div>` : ''}
+				${type === 'teachers' && subject ? `<div class="desc">${subject}</div>` : ''}
 			</div>`;
 			const socialHTML = `
 			<div class="social-container">
 				<ul class="social">
-					<li>
-						<a target="_blank" rel="noopener" href="${facebook}">
-							${fbIco}
-						</a>
-					</li>
-					<li>
-						<a target="_blank" rel="noopener" href="mailto:${email}">
-							${mailIco}
-						</a>
-					</li>
+				${
+					facebook &&
+					`<li><a target="_blank" rel="noopener" href="${facebook}"> ${fbIco} </a></li>`
+				}
+				${
+					email &&
+					`<li><a target="_blank" rel="noopener" href="mailto:${email}"> ${mailIco} </a></li>`
+				}
 				</ul>
 			</div>`;
 			const htmls = `
@@ -82,44 +113,13 @@ const getHTMLS = (list, type = 0) =>
 						style="background-image: url(${photo || defaultConfig.ava})">
 					</div>
 					${infoHTML}
-					${!type ? socialHTML : ''}
+					${email || facebook ? socialHTML : ''}
 				</div>
 			</div>`;
 			return htmls;
 		});
-const renderMembers = () => {
-	memberListContainer.innerHTML = getHTMLS(members).join('');
-	// swiperWrapper.innerHTML += getHTMLS(members.slice(0, 5), 1).join('');
-	new Swiper('.members-recent .recent-list .swiper-container', {
-		direction: 'horizontal',
-		centeredSlides: false,
-		slidesPerView: 4,
-		spaceBetween: 30,
-		threshold: 4,
-		speed: 700,
-		breakpoints: {
-			950: {
-				centeredSlides: false,
-				slidesPerView: 3,
-				spaceBetween: 25,
-			},
-			780: {
-				centeredSlides: false,
-				slidesPerView: 2,
-				spaceBetween: 25,
-			},
-			420: {
-				centeredSlides: true,
-				slidesPerView: 1,
-				spaceBetween: 10,
-			},
-		},
-	});
-};
-const renderTeachers = () => {
-	memberListContainer.innerHTML = getHTMLS(teachers).join('');
-	// swiperWrapper.innerHTML += getHTMLS(teachers.slice(0, 5), 1).join('');
-	new Swiper('.members-recent .recent-list .swiper-container', {
+const geneSwiper = (ele) => {
+	new Swiper(ele, {
 		direction: 'horizontal',
 		centeredSlides: false,
 		slidesPerView: 4,
@@ -148,29 +148,33 @@ const renderTeachers = () => {
 const searchBarHandle = (e) => (section, list, type) => {
 	const value = e.currentTarget.value.trim().toLowerCase();
 	if (!value) {
-		section.innerHTML = '';
+		render[type]();
 		return;
 	}
 
 	if (['*', '.'].includes(value)) {
-		section.innerHTML = getHTMLS(list, type === 'teachers').join('');
+		section.innerHTML = getHTMLS(list, type).join('');
 		return;
 	}
 
 	const newList = list.filter(
 		(item) =>
+			item?.link == value ||
 			item?.index == value ||
 			item?._class?.toLowerCase() === value ||
 			item?.subject?.toLowerCase() === value ||
 			item?.name?.toLowerCase()?.includes(value) ||
 			item?.vi_name?.toLowerCase()?.includes(value)
 	);
-	section.innerHTML = getHTMLS(newList, type === 'teachers').join('');
+	section.innerHTML = getHTMLS(newList, type).join('');
 	section.scroll(0, 0);
 };
 
 // Init App
 (() => {
+	// Cancle Mode
+	document.body.onclick = () => app.classList.add('mini');
+
 	// Menu Switch
 	const switchBtn = $('.header .switch-btn');
 	switchBtn.onclick = (e) => {
@@ -227,28 +231,34 @@ const searchBarHandle = (e) => (section, list, type) => {
 	const fetchData = await Promise.allSettled([
 		fetch(`${API}/api/teachers/list`),
 		fetch(`${API}/api/members/list`),
+		fetch(`${API}/api/aio/list`),
 	]);
 	const data = fetchData.map((data, idx) => {
 		if (data.status === 'fulfilled') return data.value.json();
-		// return localData[idx];
+		return localData[idx];
 	});
-	const [teachersData, membersData] = data;
+	const [teachersData, membersData, aioData] = data;
 	teachers = await teachersData;
 	members = await membersData;
+	aio = await aioData;
 
-	members.sort((a, b) => a.index - b.index);
 	teachers.sort((a, b) => a.index - b.index);
+	members.sort((a, b) => a.index - b.index);
+	aio.sort();
 
-	searchInp.oninput = (e) => {
+	aioSearchInp.oninput = (e) => {
+		searchBarHandle(e)(aioListContainer, aio, 'aio');
+	};
+	memberSearchInp.oninput = (e) => {
 		searchBarHandle(e)(memberListContainer, members, 'members');
 	};
-
-	searchBtn.onclick = () => {
-		searchContainer.classList.toggle('teachers');
-		if (getSearchMode()) {
-			memberListContainer.innerHTML = '';
-			searchInp.oninput = (e) => {
-				const searchMode = getSearchMode();
+	memberSearchBtn.onclick = () => {
+		memberSearchContainer.classList.toggle('teachers');
+		render['members']();
+		if (getSearchMode('teachers')) {
+			render['teachers']();
+			memberSearchInp.oninput = (e) => {
+				const searchMode = getSearchMode('teachers');
 				searchBarHandle(e)(
 					memberListContainer,
 					searchMode ? teachers : members,
@@ -257,6 +267,7 @@ const searchBarHandle = (e) => (section, list, type) => {
 			};
 		}
 	};
-	renderMembers();
+	render['members']();
+	render['aio']();
 	resetUI();
 })(members, teachers);

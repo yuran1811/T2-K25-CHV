@@ -94,10 +94,44 @@
 				background-color: white;
 			}
 		}
+		.pass-container {
+			position: relative;
+		}
+		label {
+			&.pass-mode {
+				position: absolute;
+				right: -3.2rem;
+				top: 50%;
+				transform: translateY(-50%);
+				cursor: pointer;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 3.2rem;
+				height: 3.2rem;
+				border-radius: 50%;
+				background-color: white;
+
+				& > .show {
+					display: none;
+				}
+				& > .hide {
+					display: block;
+				}
+
+				&.show {
+					& > .show {
+						display: block;
+					}
+					& > .hide {
+						display: none;
+					}
+				}
+			}
+		}
 		input {
 			padding: 1rem 2rem;
 			margin: 1rem;
-			width: 85%;
 			max-width: 20rem;
 			max-height: 10rem;
 			border: none;
