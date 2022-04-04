@@ -1,4 +1,3 @@
-// Variables
 $XS: 480px;
 $SM: 768px;
 $MD: 1024px;
@@ -9,7 +8,8 @@ $side-bar-width-tab: 25rem;
 $side-bar-width-pc: 20rem;
 $header-height: 10rem;
 
-// <-- Colors -->
+$text-color: black;
+
 $grdi1: linear-gradient(to right, #5e42a6, #b74e91);
 $grdi2: linear-gradient(319deg, #b199f3, #e59ebc);
 $grdi3: linear-gradient(45deg, #bd71d0, #d8707e);
@@ -38,9 +38,6 @@ $grdi16: linear-gradient(
 );
 $grdi17: linear-gradient(45deg, #ffa1cc, #bd8bff);
 
-$text-color: black;
-
-// Responsive
 @mixin Responsive($size) {
 	@media only screen and (min-width: $size) {
 		@content;
