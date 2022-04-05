@@ -1,14 +1,14 @@
 (() => {
 	const app = document.querySelector('#app');
-	const inputRule = `onkeydown="inputAvoidSubmit(event)"`;
+	const inputEvent = `onkeydown="inputAvoidSubmit(event)"`;
 
 	const logInCPN = `
 	<form class="log-in-container">
 		<div class="title">Welcome</div>
-		<input ${inputRule} type="text" name="name" class="name" autocomplete="off" placeholder="User Name" />
+		<input ${inputEvent} type="text" name="name" class="name" autocomplete="off" placeholder="User Name" />
 		<div class="pass-container">
 			<input
-				${inputRule}
+				${inputEvent}
 				type="password"
 				name="pass"
 				class="pass"
@@ -36,8 +36,8 @@
 			content: `
 			<div class="content-item user-item">
 				<form method="POST">
-					<input ${inputRule} type="text" name="name" placeholder="Username"/>
-					<input ${inputRule} type="text" name="pass" placeholder="Password"/>
+					<input ${inputEvent} type="text" name="name" placeholder="Username"/>
+					<input ${inputEvent} type="text" name="pass" placeholder="Password"/>
 					<button type="submit" class="edit" onclick="userEdit(event)">
 						<div class="submit-ico">
 							<i class="bi bi-pen edit-ico"></i>
