@@ -82,6 +82,11 @@
 			icon: '<i class="bi bi-calendar3"></i>',
 			extra: ``,
 		},
+		{
+			name: 'Posts',
+			icon: '<i class="bi bi-file-earmark-post"></i>',
+			extra: ``,
+		},
 	];
 
 	const toolCpn = `

@@ -1,11 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap');
 
-*,
-*::before,
-*::after {
-	box-sizing: border-box;
-}
 * {
 	margin: 0;
 	padding: 0;
@@ -14,10 +9,15 @@
 	font-family: 'Dosis', sans-serif;
 	// font-family: 'Raleway', sans-serif;
 	-webkit-tap-highlight-color: transparent;
-}
-::-webkit-scrollbar,
-::-webkit-scrollbar-thumb {
-	width: 0;
+	&,
+	&::before,
+	&::after {
+		box-sizing: border-box;
+	}
+	&::-webkit-scrollbar,
+	&::-webkit-scrollbar-thumb {
+		width: 0;
+	}
 }
 
 html {
@@ -38,13 +38,15 @@ ul {
 	list-style-type: none;
 }
 
-a:link,
-a:visited,
-a:hover,
-a:active,
-a:focus {
-	text-decoration: none;
-	color: transparent;
+a {
+	&:link,
+	&:visited,
+	&:hover,
+	&:active,
+	&:focus {
+		text-decoration: none;
+		color: transparent;
+	}
 }
 
 input {

@@ -112,7 +112,10 @@ body {
 	.loading {
 		background-color: black;
 		position: fixed;
-		inset: 0;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
 		opacity: 1;
 		z-index: 10;
 		display: flex;
@@ -158,7 +161,10 @@ body {
 
 	#app {
 		position: absolute;
-		inset: 0;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
 		&.mini {
 			.sidebar {
 				width: 0;
@@ -606,7 +612,10 @@ body {
 
 					.search {
 						position: absolute;
-						inset: 0;
+						top: 0;
+						left: 0;
+						right: 0;
+						bottom: 0;
 						&-input {
 							height: $searchbar-sz;
 							width: calc(100% - #{$searchbar-sz});

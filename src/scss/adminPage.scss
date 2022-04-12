@@ -2,7 +2,7 @@
 @import 'reset';
 
 :root {
-	--nav-width: 5rem;
+	--nav-width: 7rem;
 }
 
 * {
@@ -19,10 +19,18 @@
 		border-color: black;
 	}
 }
+%textOverflow {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
 
 .box {
 	position: fixed;
-	inset: 0;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 	perspective: 350px;
 	z-index: -1;
 	background-color: rgba(0, 0, 0, 0.75);
@@ -66,7 +74,10 @@
 
 	.log-in-container {
 		position: fixed;
-		inset: 0;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
 		display: flex;
 		align-items: center;
 		flex-direction: column;
@@ -172,6 +183,7 @@
 		height: 100vh;
 		display: none;
 		overflow: hidden auto;
+		max-width: var(--nav-width);
 		min-width: var(--nav-width);
 		.user {
 			padding: 1rem;
@@ -193,9 +205,14 @@
 				padding: 1rem;
 				font-weight: 600;
 				display: none;
+				@extend %textOverflow;
 				@include Responsive($SM) {
 					display: block;
 				}
+			}
+
+			@include Responsive($SM) {
+				padding: 1rem 4.2rem;
 			}
 		}
 		ul {
@@ -232,6 +249,7 @@
 				}
 				span {
 					display: none;
+					@extend %textOverflow;
 					@include Responsive($SM) {
 						display: block;
 					}
@@ -240,7 +258,7 @@
 		}
 
 		&.mini {
-			--nav-width: 5rem;
+			--nav-width: 7rem;
 			ul li {
 				i {
 					margin: 0 0.3rem;
@@ -251,7 +269,7 @@
 			}
 		}
 		@include Responsive($SM) {
-			--nav-width: 20rem;
+			--nav-width: 22rem;
 		}
 	}
 	.main {
@@ -267,9 +285,6 @@
 			padding: 1rem;
 			display: block;
 			margin-bottom: 10rem;
-			&.hide {
-				display: none;
-			}
 
 			h2 {
 				text-align: center;
@@ -344,8 +359,24 @@
 							margin: 0.5rem;
 							width: 90%;
 							@extend %animateBorder;
+
+							&[type='color'] {
+								width: 6.5rem;
+								height: 6.5rem;
+								padding: 0.3rem;
+								border: none;
+							}
+
 							@include Responsive($SM) {
 								max-width: 30rem;
+								&[type='color'] {
+									width: 4rem;
+									height: 4rem;
+								}
+								&[name='name'] {
+									width: 30%;
+									max-width: 16rem;
+								}
 							}
 						}
 						button {
@@ -414,6 +445,15 @@
 					@include Responsive($SM) {
 						max-width: 72rem;
 					}
+				}
+			}
+
+			&.hide {
+				display: none;
+			}
+			&.user {
+				input[name='pass'] {
+					width: 30%;
 				}
 			}
 		}

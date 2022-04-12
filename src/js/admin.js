@@ -55,9 +55,9 @@ const getContent = (list, type) =>
 			return `
 			<div class="content-item ${type}-item">
 				<form class="${type}-data" data-${type}id="${_id}" data-type="${type}" method="POST">
+				<input ${inputRule} type="color" name="color" value="${item.color}"/>
 					<input ${inputRule} type="text" name="name" value="${item.name}" placeholder="No subject"/>
 					<input ${inputRule} type="text" name="link" value="${item.link}" placeholder="No link url"/>
-					<input ${inputRule} type="text" name="color" value="${item.color}" placeholder="No color"/>
 					<button type="submit" class="edit" onclick="formEdit(event)">
 						<div class="submit-ico">
 							<i class="bi bi-pen edit-ico"></i>
