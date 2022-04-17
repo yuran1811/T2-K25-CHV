@@ -13,9 +13,10 @@ const icons = {
 	mailIco: '<i class="bi bi-envelope"></i>',
 };
 const { fbIco, mailIco } = icons;
-const API_LINK = 'https://t2k25chvapi.herokuapp.com';
+const HRK_LINK = 'https://t2k25chvapi.herokuapp.com';
+const RW_LINK = 'https://t2k25chv-api.up.railway.app';
 const API_TEST = 'http://localhost:1811';
-const API = API_LINK;
+const API = RW_LINK;
 
 const app = $('#app');
 const loadingItem = $('.loading');
