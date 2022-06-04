@@ -1,18 +1,17 @@
 @import 'config';
 @import 'reset';
+@import 'inherits';
 
 %cardUI {
 	.card {
+		@extend %flexCenter;
+		flex-direction: column;
 		position: relative;
 		overflow: hidden;
 		margin: 1rem;
 		width: 95%;
 		height: 20rem;
 		border-radius: 3rem;
-		display: flex;
-		align-items: center;
-		flex-direction: column;
-		justify-content: center;
 		&:hover {
 			.card-img {
 				filter: blur(0.24rem);
@@ -44,9 +43,7 @@
 			transition: all 0.15s ease;
 		}
 		.info-container {
-			display: flex;
-			align-items: center;
-			justify-items: center;
+			@extend %flexCenter;
 			flex-direction: column;
 			padding-top: 1rem;
 
@@ -80,9 +77,8 @@
 			transition: all 0.2s ease;
 
 			.social {
-				display: flex;
-				align-items: center;
-				justify-content: center;
+				@extend %flexCenter;
+
 				& > li {
 					border-radius: 50%;
 					position: relative;
@@ -110,6 +106,7 @@
 
 body {
 	.loading {
+		@extend %flexCenter;
 		background-color: black;
 		position: fixed;
 		top: 0;
@@ -118,9 +115,6 @@ body {
 		bottom: 0;
 		opacity: 1;
 		z-index: 10;
-		display: flex;
-		align-items: center;
-		justify-content: center;
 		transition: all 0.3s ease;
 		&.hide {
 			opacity: 0;
@@ -243,6 +237,7 @@ body {
 				}
 			}
 			.admin-page {
+				@extend %flexCenter;
 				position: relative;
 				right: 1rem;
 				min-width: 5rem;
@@ -250,9 +245,6 @@ body {
 				border-radius: 50%;
 				background-color: #6bdbac;
 				z-index: 1;
-				display: flex;
-				align-items: center;
-				justify-content: center;
 
 				span {
 					padding: 1rem 1.4rem;
@@ -355,12 +347,10 @@ body {
 			}
 			.home {
 				& > ul {
+					@extend %flexCenter;
+					flex-direction: column;
 					margin: auto;
 					width: 100%;
-					display: flex;
-					align-items: center;
-					flex-direction: column;
-					justify-content: center;
 					transition: all 0.2s ease;
 
 					& > li {
@@ -397,6 +387,7 @@ body {
 						}
 
 						& > button {
+							@extend %flexCenter;
 							cursor: pointer;
 							position: absolute;
 							bottom: 0;
@@ -408,9 +399,6 @@ body {
 							color: white;
 							font-size: 3rem;
 							padding: 2rem;
-							display: flex;
-							align-items: center;
-							justify-content: center;
 							text-align: center;
 							border-radius: 1.5rem;
 							background-image: $grdi1;
@@ -504,10 +492,9 @@ body {
 			}
 			.about {
 				.about-container {
-					display: flex;
-					align-items: center;
+					@extend %flexCenter;
 					flex-direction: column;
-					justify-content: center;
+
 					.about {
 						&-title {
 							width: 100%;
@@ -518,15 +505,15 @@ body {
 							text-align: center;
 						}
 						&-content {
-							display: flex;
-							align-items: center;
+							@extend %flexCenter;
 							flex-direction: column;
-							justify-content: center;
 							width: 100%;
+
 							.item {
 								text-align: center;
 								padding: 1rem;
 							}
+
 							@include Responsive($SM) {
 								width: 90%;
 							}
@@ -596,10 +583,8 @@ body {
 				}
 
 				&-search {
+					@extend %flexCenter;
 					position: relative;
-					display: flex;
-					align-items: center;
-					justify-content: center;
 					width: 100%;
 					height: $searchbar-sz;
 					&.teachers {
@@ -671,17 +656,13 @@ body {
 							}
 						}
 						&-list {
-							display: flex;
+							@extend %flexCenter;
 							flex-wrap: wrap;
-							align-items: center;
-							justify-content: center;
 
 							.swiper-container {
+								@extend %flexCenter;
 								position: relative;
 								width: 85vw;
-								display: flex;
-								align-items: center;
-								justify-content: center;
 								overflow: hidden;
 
 								.swiper-wrapper {
@@ -734,13 +715,11 @@ body {
 						background-image: $grdi4;
 					}
 					.list-container {
+						@extend %flexCenter;
+						flex-wrap: wrap;
 						position: relative;
 						bottom: 3rem;
 						padding: 2rem 0 15rem;
-						display: flex;
-						flex-wrap: wrap;
-						align-items: center;
-						justify-content: center;
 
 						.swiper-slide {
 							margin: 1rem;
@@ -813,9 +792,8 @@ body {
 			.aio {
 				margin: 2rem;
 				&-search {
-					display: flex;
-					align-items: center;
-					justify-content: center;
+					@extend %flexCenter;
+
 					.search-input {
 						padding: 1rem 1.5rem;
 						border-radius: 3rem;
@@ -826,11 +804,10 @@ body {
 				&-list {
 					margin-top: 3rem;
 					.list-container {
-						position: relative;
-						display: flex;
+						@extend %flexCenter;
 						flex-flow: column wrap;
-						align-items: center;
-						justify-content: center;
+						position: relative;
+
 						a {
 							// background: var(--link-bg);
 							border-radius: 1.5rem;
@@ -859,6 +836,7 @@ body {
 			}
 		}
 		.contact {
+			@extend %flexCenter;
 			position: fixed;
 			bottom: 5rem;
 			right: 5rem;
@@ -866,9 +844,6 @@ body {
 			height: 5rem;
 			border-radius: 50%;
 			background-image: $grdi5;
-			display: flex;
-			align-items: center;
-			justify-content: center;
 			transition: all 0.3s ease;
 			&.active,
 			&:hover {
@@ -925,10 +900,8 @@ body {
 		}
 
 		.blank-container {
-			display: flex;
-			align-items: center;
+			@extend %flexCenter;
 			flex-direction: column;
-			justify-content: center;
 			.blank {
 				&-title {
 					color: black;

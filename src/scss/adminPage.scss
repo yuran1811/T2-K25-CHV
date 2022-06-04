@@ -1,5 +1,6 @@
 @import 'config';
 @import 'reset';
+@import 'inherits';
 
 :root {
 	--nav-width: 7rem;
@@ -9,36 +10,16 @@
 	transition: all 0.3s ease;
 }
 
-%animateBorder {
-	border-top-color: transparent;
-	border-right-color: transparent;
-	border-left-color: transparent;
-	transition: border-left-color 0.2s ease, border-top-color 0.2s 0.06s ease,
-		border-right-color 0.2s 0.12s ease;
-	&:focus {
-		border-color: black;
-	}
-}
-%textOverflow {
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-}
-
 .box {
+	@extend %flexCenter;
+	@extend %fullSize;
 	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
 	perspective: 350px;
-	z-index: -1;
 	background-color: rgba(0, 0, 0, 0.75);
 	transition: all 0.3s ease;
+	z-index: -1;
 	opacity: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+
 	&.active {
 		opacity: 1;
 		z-index: 100;
@@ -56,13 +37,16 @@
 #app {
 	height: 100vh;
 	display: flex;
+
 	&.isAuth {
 		.log-in-container {
 			display: none;
 		}
+
 		nav {
 			display: block;
 		}
+
 		.main {
 			display: block;
 		}
@@ -73,27 +57,24 @@
 	}
 
 	.log-in-container {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		display: flex;
-		align-items: center;
+		@extend %flexCenter;
+		@extend %fullSize;
 		flex-direction: column;
-		justify-content: center;
+		position: fixed;
 		background: $grdi17;
 		z-index: 10;
 
 		* {
 			font-size: 2rem;
 		}
+
 		.title {
 			position: relative;
 			font-weight: 600;
 			font-size: 5rem;
 			color: white;
 			margin: 1rem;
+
 			&::after {
 				content: '';
 				position: absolute;
@@ -105,19 +86,19 @@
 				background-color: white;
 			}
 		}
+
 		.pass-container {
 			position: relative;
 		}
+
 		label {
 			&.pass-mode {
+				@extend %flexCenter;
 				position: absolute;
 				right: -3.2rem;
 				top: 50%;
 				transform: translateY(-50%);
 				cursor: pointer;
-				display: flex;
-				align-items: center;
-				justify-content: center;
 				width: 3.2rem;
 				height: 3.2rem;
 				border-radius: 50%;
@@ -140,6 +121,7 @@
 				}
 			}
 		}
+
 		input {
 			padding: 1rem 2rem;
 			margin: 1rem;
@@ -151,6 +133,7 @@
 			border-radius: 4rem;
 			text-align: center;
 		}
+
 		button {
 			margin: 1rem;
 			width: 10rem;
@@ -160,10 +143,12 @@
 			background: $grdi1;
 			font-weight: 600;
 			color: white;
+
 			span {
 				font-weight: 500;
 			}
 		}
+
 		.err-msg {
 			padding: 1rem;
 			margin: 0.5rem;
@@ -171,11 +156,13 @@
 			color: white;
 			background: rgb(235, 46, 46);
 			border-radius: 3rem;
+
 			&.isErr {
 				display: block;
 			}
 		}
 	}
+
 	nav {
 		position: relative;
 		top: 0;
@@ -185,27 +172,28 @@
 		overflow: hidden auto;
 		max-width: var(--nav-width);
 		min-width: var(--nav-width);
+
 		.user {
+			@extend %flexCenter;
 			padding: 1rem;
-			display: flex;
-			align-items: center;
-			justify-content: center;
+
 			.ava {
+				@extend %flexCenter;
 				width: 4rem;
 				height: 4rem;
 				border-radius: 50%;
-				display: flex;
-				align-items: center;
-				justify-content: center;
+
 				i {
 					font-size: 3rem;
 				}
 			}
+
 			.name {
+				@extend %textOverflow;
 				padding: 1rem;
 				font-weight: 600;
 				display: none;
-				@extend %textOverflow;
+
 				@include Responsive($SM) {
 					display: block;
 				}
@@ -215,11 +203,13 @@
 				padding: 1rem 4.2rem;
 			}
 		}
+
 		ul {
 			display: flex;
 			align-items: center;
 			flex-direction: column;
 			padding: 1rem;
+
 			li {
 				cursor: pointer;
 				width: 90%;
@@ -233,10 +223,12 @@
 				display: flex;
 				align-items: center;
 				justify-content: start;
+
 				&.active {
 					background-color: rgb(255, 217, 223);
 					color: black;
 				}
+
 				& + li {
 					margin-top: 2rem;
 				}
@@ -247,9 +239,10 @@
 						margin: 0 1rem;
 					}
 				}
+
 				span {
-					display: none;
 					@extend %textOverflow;
+					display: none;
 					@include Responsive($SM) {
 						display: block;
 					}
@@ -259,19 +252,23 @@
 
 		&.mini {
 			--nav-width: 7rem;
+
 			ul li {
 				i {
 					margin: 0 0.3rem;
 				}
+
 				span {
 					display: none;
 				}
 			}
 		}
+
 		@include Responsive($SM) {
 			--nav-width: 22rem;
 		}
 	}
+
 	.main {
 		position: relative;
 		top: 0;
@@ -280,6 +277,7 @@
 		width: calc(100% - var(--nav-width));
 		overflow: hidden auto;
 		display: none;
+
 		section {
 			position: relative;
 			padding: 1rem;
@@ -287,58 +285,60 @@
 			margin-bottom: 10rem;
 
 			h2 {
+				@extend %flexCenter;
 				text-align: center;
 				font-weight: 600;
 				font-size: 4rem;
-				display: flex;
-				align-items: center;
-				justify-content: center;
+
 				i {
 					margin: 1rem;
 					font-size: 3.7rem;
 				}
 			}
+
 			input {
 				&::placeholder {
 					font-style: italic;
 				}
 
 				&.search-bar {
+					@extend %animateBorder;
 					border-radius: 3rem;
 					margin-top: 1.5rem;
 					position: relative;
 					left: 50%;
 					transform: translateX(-50%);
 					padding: 1rem 1.6rem;
-					@extend %animateBorder;
 				}
 			}
+
 			.add-btn {
+				@extend %flexCenter;
 				position: relative;
 				width: 4.4rem;
 				height: 4.4rem;
 				border-radius: 50%;
 				margin: 1rem auto;
 				cursor: pointer;
-				display: flex;
-				align-items: center;
-				justify-content: center;
 				&:hover {
 					background-color: rgb(236, 236, 236);
 				}
 			}
+
 			.content {
 				padding: 1rem;
 				display: flex;
 				align-items: center;
 				justify-content: start;
 				flex-direction: column;
+
 				&-item {
 					border: 5px solid transparent;
 					border-radius: 3rem;
 					width: 100%;
 					padding: 2rem 0;
 					margin-top: 2rem;
+
 					&:hover,
 					&.active {
 						border-color: lightcoral;
@@ -355,10 +355,10 @@
 						flex-direction: column;
 
 						input {
+							@extend %animateBorder;
 							padding: 0.6rem 1.2rem;
 							margin: 0.5rem;
 							width: 90%;
-							@extend %animateBorder;
 
 							&[type='color'] {
 								width: 6.5rem;
@@ -369,6 +369,7 @@
 
 							@include Responsive($SM) {
 								max-width: 30rem;
+
 								&[type='color'] {
 									width: 4rem;
 									height: 4rem;
@@ -379,16 +380,16 @@
 								}
 							}
 						}
+
 						button {
+							@extend %flexCenter;
 							border-radius: 2rem;
 							position: absolute;
 							cursor: pointer;
 							bottom: -6rem;
 							margin: 1rem;
 							padding: 1rem;
-							display: flex;
-							align-items: center;
-							justify-content: center;
+
 							&,
 							i {
 								transition: all 0.3s ease;
@@ -397,37 +398,42 @@
 							&.edit {
 								i {
 									display: none;
-								}
-								i[class*='edit'] {
-									display: block;
+									&[class*='edit'] {
+										display: block;
+									}
 								}
 							}
+
 							&.sync {
 								i {
 									display: none;
-								}
-								i[class*='sync'] {
-									display: block;
+									&[class*='sync'] {
+										display: block;
+									}
 								}
 							}
+
 							&.success {
 								background-color: rgb(103, 233, 103);
 								color: white;
+
 								i {
 									display: none;
-								}
-								i[class*='success'] {
-									display: block;
+									&[class*='success'] {
+										display: block;
+									}
 								}
 							}
+
 							&.fail {
 								background-color: rgb(255, 122, 122);
 								color: white;
+
 								i {
 									display: none;
-								}
-								i[class*='fail'] {
-									display: block;
+									&[class*='fail'] {
+										display: block;
+									}
 								}
 							}
 
@@ -451,6 +457,7 @@
 			&.hide {
 				display: none;
 			}
+
 			&.user {
 				input[name='pass'] {
 					width: 30%;
